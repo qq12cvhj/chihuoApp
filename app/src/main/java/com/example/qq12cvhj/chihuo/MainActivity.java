@@ -13,10 +13,11 @@ import devlight.io.library.ntb.NavigationTabBar;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private android.support.v4.app.FragmentManager fm;
+    private android.support.v4.app.FragmentTransaction ft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        fm = getSupportFragmentManager();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         view = LayoutInflater.from(
                                 getBaseContext()).inflate(R.layout.cookbook_fragment, null, false);
+                        CookbookContent cbc = new CookbookContent();
+                        ft = fm.beginTransaction();
+                        ft.add(R.id.cookbook_fragment,cbc);
+                        ft.commit();
                         container.addView(view);
                         break;
                     //朋友fragment
