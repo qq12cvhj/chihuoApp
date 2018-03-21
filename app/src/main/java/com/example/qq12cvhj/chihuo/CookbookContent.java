@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
@@ -23,11 +25,11 @@ import java.util.List;
  */
 
 public class CookbookContent extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.cookbook_content, null, false);
-
         return view;
     }
 
@@ -39,6 +41,7 @@ public class CookbookContent extends Fragment {
 
     @Override
     public void onStart() {
+        commonInfo.getAndSetFoodInfo();
         RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_cookbook);
         RecyclerViewExpandableItemManager expMgr = new RecyclerViewExpandableItemManager(null);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -98,16 +101,16 @@ public class CookbookContent extends Fragment {
         }
     }
     //这个地方要引入所有菜系以及菜系之下的菜品名称等
-    static class MyAdapter extends AbstractExpandableItemAdapter<FoodTypeViewHolder, FoodViewHolder> {
+    public static class MyAdapter extends AbstractExpandableItemAdapter<FoodTypeViewHolder, FoodViewHolder> {
         List<FoodTypeItem> mItems;
         public MyAdapter() {
             setHasStableIds(true); // this is required for expandable feature.
 
             mItems = new ArrayList<>();
-            for (int i = 0; i < 20; i++) {
-                FoodTypeItem group = new FoodTypeItem(i, "菜系 " + i,"没有描述");
-                for (int j = 0; j < 5; j++) {
-                    group.foodItems.add(new FoodItem(j, "菜品 " + j,"qq12cvhj"));
+            for (int i = 0; i < commonInfo.foodTypeList.size(); i++) {
+                FoodTypeItem group = new FoodTypeItem(commonInfo.foodTypeList.get(i).typeId, commonInfo.foodTypeList.get(i).typeName,commonInfo.foodTypeList.get(i).description);
+                for (int j = 0;j < commonInfo.foodTypeList.get(i).foodInfoList.size(); j++) {
+                    group.foodItems.add(new FoodItem(commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodId, commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodName ,commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodAuthor));
                 }
                 mItems.add(group);
             }
@@ -139,13 +142,15 @@ public class CookbookContent extends Fragment {
         @Override
         public FoodTypeViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_foodtype_item_for_expandable_minimal, parent, false);
-            return new FoodTypeViewHolder(v);
+            FoodTypeViewHolder foodTypeViewHolder = new FoodTypeViewHolder(v);
+            return foodTypeViewHolder;
         }
         //这个不需要动
         @Override
         public FoodViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_food_item_for_expandable_minimal, parent, false);
-            return new FoodViewHolder(v);
+            FoodViewHolder foodViewHolder = new FoodViewHolder(v);
+            return foodViewHolder;
         }
         //这个在定义完菜系之后进行相应的修改
         @Override
@@ -165,9 +170,16 @@ public class CookbookContent extends Fragment {
         }
         //这个在定义完菜品之后进行相应的修改
         @Override
-        public void onBindChildViewHolder(FoodViewHolder holder, int groupPosition, int childPosition, int viewType) {
+        public void onBindChildViewHolder(FoodViewHolder holder, final int groupPosition, final int childPosition, int viewType) {
             FoodItem foodItem = mItems.get(groupPosition).foodItems.get(childPosition);
             holder.nameView.setText(foodItem.text);
+            //设置每个条目的点击事件
+            holder.nameView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"你点击了"+groupPosition+"中的第"+childPosition+"个",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
