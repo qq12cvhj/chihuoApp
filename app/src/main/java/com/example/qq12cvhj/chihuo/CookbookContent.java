@@ -1,5 +1,6 @@
 package com.example.qq12cvhj.chihuo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -79,7 +80,7 @@ public class CookbookContent extends Fragment {
         TextView nameView;
         public MyBaseViewHolder(View itemView) {
             super(itemView);
-            nameView = itemView.findViewById(android.R.id.text1);
+            nameView = itemView.findViewById(R.id.name);
         }
     }
     //
@@ -87,7 +88,7 @@ public class CookbookContent extends Fragment {
         TextView descView;
         public FoodTypeViewHolder(View itemView) {
             super(itemView);
-            descView = itemView.findViewById(android.R.id.text1);
+            descView = itemView.findViewById(R.id.foodtype_desc);
         }
     }
 
@@ -104,9 +105,9 @@ public class CookbookContent extends Fragment {
 
             mItems = new ArrayList<>();
             for (int i = 0; i < 20; i++) {
-                FoodTypeItem group = new FoodTypeItem(i, "GROUP " + i,"没有描述");
+                FoodTypeItem group = new FoodTypeItem(i, "菜系 " + i,"没有描述");
                 for (int j = 0; j < 5; j++) {
-                    group.foodItems.add(new FoodItem(j, "child " + j,"qq12cvhj"));
+                    group.foodItems.add(new FoodItem(j, "菜品 " + j,"qq12cvhj"));
                 }
                 mItems.add(group);
             }
@@ -151,6 +152,16 @@ public class CookbookContent extends Fragment {
         public void onBindGroupViewHolder(FoodTypeViewHolder holder, int groupPosition, int viewType) {
             FoodTypeItem foodTypeItem = mItems.get(groupPosition);
             holder.nameView.setText(foodTypeItem.text);
+            holder.descView.setText(foodTypeItem.foodTypeDescription);
+            int colorWhite = Color.parseColor("#FFFFFF");
+            int colorGray = Color.parseColor("#11EEEE");
+            if(groupPosition%2!=0){
+                holder.nameView.setBackgroundColor(colorWhite);
+                holder.descView.setBackgroundColor(colorWhite);
+            }else{
+                holder.nameView.setBackgroundColor(colorGray);
+                holder.descView.setBackgroundColor(colorGray);
+            }
         }
         //这个在定义完菜品之后进行相应的修改
         @Override
