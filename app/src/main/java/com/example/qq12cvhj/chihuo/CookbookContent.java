@@ -11,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,106 +57,110 @@ public class CookbookContent extends Fragment {
         }
     }
 
-    static class MyGroupItem extends MyBaseItem {
-        public final List<MyChildItem> children;
-
-        public MyGroupItem(long id, String text) {
-            super(id, text);
-            children = new ArrayList<>();
+    static class FoodTypeItem extends MyBaseItem {
+        public final List<FoodItem> foodItems; //一个菜系之下的菜品名称列表
+        public  String foodTypeDescription; //一个菜系的介绍
+        public FoodTypeItem(long id, String foodTypeName,String desc) {
+            super(id, foodTypeName);
+            foodItems = new ArrayList<>();
+            foodTypeDescription = desc;
         }
     }
 
-    static class MyChildItem extends MyBaseItem {
-        public MyChildItem(long id, String text) {
-            super(id, text);
+    static class FoodItem extends MyBaseItem {
+        public String authorName;
+        public FoodItem(long id, String foodName,String author) {
+            super(id, foodName);
+            authorName = author;
         }
     }
 
     static abstract class MyBaseViewHolder extends AbstractExpandableItemViewHolder {
-        TextView textView;
-
+        TextView nameView;
         public MyBaseViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            nameView = itemView.findViewById(android.R.id.text1);
+        }
+    }
+    //
+    static class FoodTypeViewHolder extends MyBaseViewHolder {
+        TextView descView;
+        public FoodTypeViewHolder(View itemView) {
+            super(itemView);
+            descView = itemView.findViewById(android.R.id.text1);
         }
     }
 
-    static class MyGroupViewHolder extends MyBaseViewHolder {
-        public MyGroupViewHolder(View itemView) {
+    static class FoodViewHolder extends MyBaseViewHolder {
+        public FoodViewHolder(View itemView) {
             super(itemView);
         }
     }
-
-    static class MyChildViewHolder extends MyBaseViewHolder {
-        public MyChildViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
-
-    static class MyAdapter extends AbstractExpandableItemAdapter<MyGroupViewHolder, MyChildViewHolder> {
-        List<MyGroupItem> mItems;
-
+    //这个地方要引入所有菜系以及菜系之下的菜品名称等
+    static class MyAdapter extends AbstractExpandableItemAdapter<FoodTypeViewHolder, FoodViewHolder> {
+        List<FoodTypeItem> mItems;
         public MyAdapter() {
             setHasStableIds(true); // this is required for expandable feature.
 
             mItems = new ArrayList<>();
             for (int i = 0; i < 20; i++) {
-                MyGroupItem group = new MyGroupItem(i, "GROUP " + i);
+                FoodTypeItem group = new FoodTypeItem(i, "GROUP " + i,"没有描述");
                 for (int j = 0; j < 5; j++) {
-                    group.children.add(new MyChildItem(j, "child " + j));
+                    group.foodItems.add(new FoodItem(j, "child " + j,"qq12cvhj"));
                 }
                 mItems.add(group);
             }
         }
-
+        //这个不需要动
         @Override
         public int getGroupCount() {
             return mItems.size();
         }
-
+        //这个不需要动
         @Override
         public int getChildCount(int groupPosition) {
-            return mItems.get(groupPosition).children.size();
+            return mItems.get(groupPosition).foodItems.size();
         }
-
+        //这个不需要动
         @Override
         public long getGroupId(int groupPosition) {
             // This method need to return unique value within all group items.
             return mItems.get(groupPosition).id;
         }
-
+        //这个不需要动
         @Override
         public long getChildId(int groupPosition, int childPosition) {
             // This method need to return unique value within the group.
-            return mItems.get(groupPosition).children.get(childPosition).id;
+            return mItems.get(groupPosition).foodItems.get(childPosition).id;
+        }
+
+        //这个不需要动
+        @Override
+        public FoodTypeViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_foodtype_item_for_expandable_minimal, parent, false);
+            return new FoodTypeViewHolder(v);
+        }
+        //这个不需要动
+        @Override
+        public FoodViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_food_item_for_expandable_minimal, parent, false);
+            return new FoodViewHolder(v);
+        }
+        //这个在定义完菜系之后进行相应的修改
+        @Override
+        public void onBindGroupViewHolder(FoodTypeViewHolder holder, int groupPosition, int viewType) {
+            FoodTypeItem foodTypeItem = mItems.get(groupPosition);
+            holder.nameView.setText(foodTypeItem.text);
+        }
+        //这个在定义完菜品之后进行相应的修改
+        @Override
+        public void onBindChildViewHolder(FoodViewHolder holder, int groupPosition, int childPosition, int viewType) {
+            FoodItem foodItem = mItems.get(groupPosition).foodItems.get(childPosition);
+            holder.nameView.setText(foodItem.text);
         }
 
         @Override
-        public MyGroupViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_group_item_for_expandable_minimal, parent, false);
-            return new MyGroupViewHolder(v);
-        }
-
-        @Override
-        public MyChildViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_child_item_for_expandable_minimal, parent, false);
-            return new MyChildViewHolder(v);
-        }
-
-        @Override
-        public void onBindGroupViewHolder(MyGroupViewHolder holder, int groupPosition, int viewType) {
-            MyGroupItem group = mItems.get(groupPosition);
-            holder.textView.setText(group.text);
-        }
-
-        @Override
-        public void onBindChildViewHolder(MyChildViewHolder holder, int groupPosition, int childPosition, int viewType) {
-            MyChildItem child = mItems.get(groupPosition).children.get(childPosition);
-            holder.textView.setText(child.text);
-        }
-
-        @Override
-        public boolean onCheckCanExpandOrCollapseGroup(MyGroupViewHolder holder, int groupPosition, int x, int y, boolean expand) {
+        public boolean onCheckCanExpandOrCollapseGroup(FoodTypeViewHolder holder, int groupPosition, int x, int y, boolean expand) {
             return true;
         }
     }
