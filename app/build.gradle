@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -16,13 +15,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
-/*repositories {
-    maven {
-        url "http://dl.bintray.com/dodola/maven"
-    }
-}*/
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
@@ -33,7 +28,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'devlight.io:navigationtabbar:1.2.5'
     compile 'com.xujinyang.BiuEditText:library:1.4.1'
-    //compile 'com.dodola:listviewext:1.0'
+    compile 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.f0ris.sweetalert:library:1.5.1'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }

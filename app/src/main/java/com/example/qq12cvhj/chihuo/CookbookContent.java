@@ -22,6 +22,7 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemVie
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.james.biuedittext.BiuEditText;
 
 /**
@@ -63,9 +64,17 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.foodSearchBtn:
                 String searchFoodStr = searchFoodEditText.getText().toString();
-                Intent intent = new Intent(getActivity(),SearchFoodActivity.class);
-                intent.putExtra("foodSearchStr",searchFoodStr);
-                startActivity(intent);
+                if(searchFoodStr.equals("")){
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("错误...")
+                            .setContentText("你并没有输入任何内容!")
+                            .show();
+                }else{
+                    Intent intent = new Intent(getActivity(),SearchFoodActivity.class);
+                    intent.putExtra("foodSearchStr",searchFoodStr);
+                    startActivity(intent);
+                }
+
                 break;
         }
     }

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.flyco.animation:FlycoAnimation_Lib-1.0.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/FlycoAnimation_Lib-1.0.0.aar/2572fda59843a9f099d4e7ba24b6fd09/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/FlycoAnimation_Lib-1.0.0.aar/2572fda59843a9f099d4e7ba24b6fd09/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.flyco.animation/FlycoAnimation_Lib/1.0.0/a429a798d50b0ef57e9bfeff489917e3b2a0a1b9/FlycoAnimation_Lib-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
