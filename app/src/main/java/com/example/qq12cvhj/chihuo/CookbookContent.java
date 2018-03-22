@@ -1,5 +1,6 @@
 package com.example.qq12cvhj.chihuo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +22,15 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemVie
 import java.util.ArrayList;
 import java.util.List;
 
+import me.james.biuedittext.BiuEditText;
+
 /**
  * Created by qq12cvhj on 2018/3/18.
  */
 
-public class CookbookContent extends Fragment {
-
+public class CookbookContent extends Fragment implements View.OnClickListener {
+    public BiuEditText searchFoodEditText;
+    public Button searchFoodBtn;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,7 +52,22 @@ public class CookbookContent extends Fragment {
         recyclerView.setAdapter(expMgr.createWrappedAdapter(new MyAdapter()));
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         expMgr.attachRecyclerView(recyclerView);
+        searchFoodBtn = (Button) getActivity().findViewById(R.id.foodSearchBtn);
+        searchFoodEditText = (BiuEditText) getActivity().findViewById(R.id.foodSearchEditText);
+        searchFoodBtn.setOnClickListener(this);
         super.onStart();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.foodSearchBtn:
+                String searchFoodStr = searchFoodEditText.getText().toString();
+                Intent intent = new Intent(getActivity(),SearchFoodActivity.class);
+                intent.putExtra("foodSearchStr",searchFoodStr);
+                startActivity(intent);
+                break;
+        }
     }
 
     static abstract class MyBaseItem {
