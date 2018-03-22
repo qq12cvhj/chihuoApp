@@ -14,6 +14,7 @@ public  class commonInfo {
      * */
     public static List<FoodTypeInfo> foodTypeList = new ArrayList<>();
     public static void getAndSetFoodInfo(){
+        foodTypeList = new ArrayList<>();
         for(int i = 0;i < 30;i++){
             commonInfo.foodTypeList.add( new FoodTypeInfo(i,"菜品"+(i),"没有描述"));
             for (int j = 0;j<5;j++){

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.xujinyang.BiuEditText:library-1.4.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.1.aar/afdc426ec47551767f1bae4ea61f04bf/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.1.aar/afdc426ec47551767f1bae4ea61f04bf/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.xujinyang.BiuEditText/library/1.4.1/6124fb06c83f9b83a7ddd44f8c36b3a42f81d83b/library-1.4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
