@@ -72,6 +72,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
                 }else{
                     Intent intent = new Intent(getActivity(),SearchFoodActivity.class);
                     intent.putExtra("foodSearchStr",searchFoodStr);
+                    commonInfo.viewChangeStatus = 1;
                     startActivity(intent);
                 }
 

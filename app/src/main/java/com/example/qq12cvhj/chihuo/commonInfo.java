@@ -22,4 +22,5 @@ public  class commonInfo {
             }
         }
     }
+    public static int viewChangeStatus = 0;
 }
