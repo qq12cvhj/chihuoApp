@@ -34,6 +34,10 @@ public class SearchFoodActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FoodInfo foodInfo = foodSearchList.get(position);
                 Toast.makeText(SearchFoodActivity.this,"你点击了第"+foodInfo.foodId+"个菜品",Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(SearchFoodActivity.this, FoodDetailActivity.class);
+                intent1.putExtra("trFoodid",foodInfo.foodId);
+                intent1.putExtra("trFoodName",foodInfo.foodName);
+                startActivity(intent1);
             }
         });
     }

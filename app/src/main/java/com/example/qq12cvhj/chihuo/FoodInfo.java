@@ -9,9 +9,10 @@ import java.util.Map;
 
 public class FoodInfo {
     int foodId;
-    String foodTypeid; //所属菜系的id.
     String foodAuthor; //菜品的作者
     String foodName; //菜品名称
+    String foodTypeid; //所属菜系的id.
+    String FoodAuthorId;
     String foodDesc; //菜品简介
     int starCount; //点赞个数
     //以下两项通过解包json、打包json进行操作

@@ -130,7 +130,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
         }
     }
     //这个地方要引入所有菜系以及菜系之下的菜品名称等
-    public static class MyAdapter extends AbstractExpandableItemAdapter<FoodTypeViewHolder, FoodViewHolder> {
+    public class MyAdapter extends AbstractExpandableItemAdapter<FoodTypeViewHolder, FoodViewHolder> {
         List<FoodTypeItem> mItems;
         public MyAdapter() {
             setHasStableIds(true); // this is required for expandable feature.
@@ -200,13 +200,19 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
         //这个在定义完菜品之后进行相应的修改
         @Override
         public void onBindChildViewHolder(FoodViewHolder holder, final int groupPosition, final int childPosition, int viewType) {
-            FoodItem foodItem = mItems.get(groupPosition).foodItems.get(childPosition);
+            final FoodItem foodItem = mItems.get(groupPosition).foodItems.get(childPosition);
             holder.nameView.setText(foodItem.text);
             //设置每个条目的点击事件
             holder.nameView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),"你点击了"+groupPosition+"中的第"+childPosition+"个",Toast.LENGTH_SHORT).show();
+                    int trFoodid = commonInfo.foodTypeList.get(groupPosition).foodInfoList.get(childPosition).foodId;
+                    String trFoodName = commonInfo.foodTypeList.get(groupPosition).foodInfoList.get(childPosition).foodName;
+                    Toast.makeText(v.getContext(),"你点击的Id为："+trFoodid,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(),FoodDetailActivity.class);
+                    intent.putExtra("trFoodid",trFoodid);
+                    intent.putExtra("trFoodName",trFoodName);
+                    startActivity(intent);
                 }
             });
         }
