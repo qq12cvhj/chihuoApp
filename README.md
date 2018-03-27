@@ -1,7 +1,7 @@
 # chihuoApp
 毕业设计
-##这里是吃货App的安卓端页面，后台页面请见
-##https://github.com/jcwayd/chihuoServerEnd
+
+这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
 3月24日15:00完成效果图（搜索结果页面与菜品信息、菜谱列表与菜品信息界面的关联，并添加一些对非法操作的解
 决方案）
