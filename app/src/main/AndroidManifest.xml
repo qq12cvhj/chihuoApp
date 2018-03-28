@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchFoodActivity" />
-        <activity android:name=".FoodDetailActivity"></activity>
-    </application>
+        <activity android:name=".FoodDetailActivity" />
+        <activity android:name=".RegActivity"></activity>
 
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

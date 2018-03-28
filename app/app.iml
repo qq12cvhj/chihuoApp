@@ -115,6 +115,7 @@
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.0.0" level="project" />
+    <orderEntry type="library" name="com.squareup.okhttp3:okhttp:3.7.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-26.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-27.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
@@ -150,5 +151,6 @@
     <orderEntry type="library" name="com.android.support:support-annotations:27.0.0@jar" level="project" />
     <orderEntry type="library" name="com.pnikosis:materialish-progress-1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.0.0" level="project" />
+    <orderEntry type="library" name="com.squareup.okio:okio:1.12.0@jar" level="project" />
   </component>
 </module>

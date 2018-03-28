@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void initViews(){
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         view = LayoutInflater.from(
                                 getBaseContext()).inflate(R.layout.me_fragment, null, false);
+                        MeContent mc = new MeContent();
+                        ft = fm.beginTransaction();
+                        ft.add(R.id.me_fragment,mc);
+                        ft.commit();
                         container.addView(view);
                         break;
                     //设置fragment

@@ -32,10 +32,16 @@ import me.james.biuedittext.BiuEditText;
 public class CookbookContent extends Fragment implements View.OnClickListener {
     public BiuEditText searchFoodEditText;
     public Button searchFoodBtn;
+    private RecyclerView recyclerView;
+    private RecyclerViewExpandableItemManager expMgr;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.cookbook_content, null, false);
+        View view = inflater.inflate(R.layout.cookbook_content, container, false);
+        recyclerView = view.findViewById(R.id.recycler_cookbook);
+        searchFoodBtn = view.findViewById(R.id.foodSearchBtn);
+        searchFoodEditText = view.findViewById(R.id.foodSearchEditText);
+        searchFoodBtn.setOnClickListener(this);
         return view;
     }
 
@@ -46,17 +52,20 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
+        recyclerView = getActivity().findViewById(R.id.recycler_cookbook);
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
         commonInfo.getAndSetFoodInfo();
-        RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_cookbook);
+
         RecyclerViewExpandableItemManager expMgr = new RecyclerViewExpandableItemManager(null);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(expMgr.createWrappedAdapter(new MyAdapter()));
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         expMgr.attachRecyclerView(recyclerView);
-        searchFoodBtn = (Button) getActivity().findViewById(R.id.foodSearchBtn);
-        searchFoodEditText = (BiuEditText) getActivity().findViewById(R.id.foodSearchEditText);
-        searchFoodBtn.setOnClickListener(this);
-        super.onStart();
+        super.onResume();
     }
 
     @Override

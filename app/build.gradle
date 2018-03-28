@@ -31,6 +31,7 @@ dependencies {
     compile 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.f0ris.sweetalert:library:1.5.1'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
