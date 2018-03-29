@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+3月29日22:00完成效果图（注册界面、注册功能的实现，类似于登录。）
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180329_3.gif)
+
 3月29日16:00完成效果图（注册界面、注册功能的实现，类似于登录。）
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180328_2.gif)
