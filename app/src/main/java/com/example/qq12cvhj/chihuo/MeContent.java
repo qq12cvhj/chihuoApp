@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,8 @@ import okhttp3.Response;
 public class MeContent extends Fragment implements View.OnClickListener {
     EditText usernameLoginInput ;
     EditText passwordLoginInput ;
-    TextView testLoginText;
+    FragmentManager fm;
+    FragmentTransaction ft;
     public int loginReturn = -4;
     @Nullable
     @Override
@@ -94,11 +97,14 @@ public class MeContent extends Fragment implements View.OnClickListener {
 
                         break;
                     default:
+                        Toast.makeText(getContext(),"恭喜，登录成功",Toast.LENGTH_SHORT).show();
                         commonInfo.currentUserId = loginReturn;
                         commonInfo.loginStatus = true;
-                        Intent restartIntent = new Intent(getActivity(),MainActivity.class);
-                        getActivity().finish();
-                        startActivity(restartIntent);
+                        MeContent newMecontent = new MeContent();
+                        fm = getActivity().getSupportFragmentManager();
+                        ft = fm.beginTransaction();
+                        ft.replace(R.id.me_fragment,newMecontent);
+                        ft.commit();
                 }
                 break;
             case R.id.login2RegBtn:
