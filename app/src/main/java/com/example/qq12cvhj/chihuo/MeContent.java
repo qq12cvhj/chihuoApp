@@ -32,6 +32,11 @@ import okhttp3.Response;
 public class MeContent extends Fragment implements View.OnClickListener {
     EditText usernameLoginInput ;
     EditText passwordLoginInput ;
+    Button myInfoBtn;
+    Button myFavoriteBtn;
+    Button myDesignBtn;
+    Button myFollowBtn;
+    Button logoutBtn;
     FragmentManager fm;
     FragmentTransaction ft;
     public int loginReturn = -4;
@@ -51,7 +56,16 @@ public class MeContent extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         if(commonInfo.loginStatus){
-
+            myInfoBtn = (Button) getView().findViewById(R.id.myInfoBtn);
+            myInfoBtn.setOnClickListener(this);
+            myFavoriteBtn = (Button)getView().findViewById(R.id.myFavoriteBtn);
+            myFavoriteBtn.setOnClickListener(this);
+            myDesignBtn =(Button) getView().findViewById(R.id.myDesignBtn);
+            myDesignBtn.setOnClickListener(this);
+            myFollowBtn = (Button)getView().findViewById(R.id.myFollowBtn);
+            myFollowBtn.setOnClickListener(this);
+            logoutBtn = (Button)getView().findViewById(R.id.logoutBtn);
+            logoutBtn.setOnClickListener(this);
         }else{
             usernameLoginInput = (EditText) getActivity().findViewById(R.id.usernameLoginInput);
             passwordLoginInput = (EditText) getActivity().findViewById(R.id.passwordLoginInput);
@@ -110,6 +124,41 @@ public class MeContent extends Fragment implements View.OnClickListener {
             case R.id.login2RegBtn:
                 Intent intent = new Intent(getActivity(),RegActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.myInfoBtn:
+                Log.d("aaa","111");
+                break;
+            case R.id.myFavoriteBtn:
+                Log.d("aaa","222");
+                break;
+            case R.id.myDesignBtn:
+                Log.d("aaa","333");
+                break;
+            case R.id.myFollowBtn:
+                Log.d("aaa","444");
+                break;
+            case R.id.logoutBtn:
+                new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("确定要退出登录么?")
+                        .setContentText("退出后只能查看食谱")
+                        .setConfirmText("退出")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                commonInfo.loginStatus = false;
+                                commonInfo.currentUserId = -1;
+                                MeContent newMecontent1 = new MeContent();
+                                fm = getFragmentManager();
+                                ft = fm.beginTransaction();
+                                ft.replace(R.id.me_fragment,newMecontent1);
+                                ft.commit();
+                                sDialog.setTitleText("退出成功!")
+                                        .setContentText("信息不再保留，请重新登录!")
+                                        .setConfirmText("OK")
+                                        .setConfirmClickListener(null)
+                                        .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                            }
+                        }).show();
                 break;
         }
     }
