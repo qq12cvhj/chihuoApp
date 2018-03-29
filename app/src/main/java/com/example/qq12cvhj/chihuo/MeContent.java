@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Time;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,6 +31,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
     EditText usernameLoginInput ;
     EditText passwordLoginInput ;
     TextView testLoginText;
+    public int loginReturn = -4;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +65,30 @@ public class MeContent extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.userLoginBtn:
                 userlogin();
-                Toast.makeText(getContext(),"你点击了登录",Toast.LENGTH_SHORT).show();
+                switch (loginReturn){
+                    case -3:
+                        showErrDiag("网络连接出错了");
+                        break;
+                    case -2:
+                        showErrDiag("密码错误");
+                        break;
+                    case -1:
+                        showErrDiag("用户名不存在");
+                        break;
+                    case -4:
+                        if(usernameLoginInput.getText().toString().trim().equals("") || passwordLoginInput.getText().toString().trim().equals("")){
+                        }else{
+                            Toast.makeText(getContext(),"抱歉，请重试",Toast.LENGTH_SHORT).show();
+                        }
+
+                        break;
+                    default:
+                        commonInfo.currentUserId = loginReturn;
+                        commonInfo.loginStatus = true;
+                        Intent restartIntent = new Intent(getActivity(),MainActivity.class);
+                        getActivity().finish();
+                        startActivity(restartIntent);
+                }
                 break;
             case R.id.login2RegBtn:
                 Intent intent = new Intent(getActivity(),RegActivity.class);
@@ -70,27 +97,43 @@ public class MeContent extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void userlogin() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody loginRequestBody = new FormBody.Builder()
-                            .add("username",usernameLoginInput.getText().toString())
-                            .add("password",passwordLoginInput.getText().toString())
-                            .build();
-                    Request loginrequest = new Request.Builder().url("http://192.168.1.110:5000/login").post(loginRequestBody).build();
-                    Response loginResponse = client.newCall(loginrequest).execute();
-                    String loginResponseData = loginResponse.body().string();
-                    //Toast.makeText(getContext(),loginResponseData,Toast.LENGTH_SHORT).show();
-                    Log.d("login",loginResponseData);
-                    testLoginText = getActivity().findViewById(R.id.testLoginText);
-                    testLoginText.setText(loginResponseData);
-                }catch(Exception e){
-                    e.printStackTrace();
+    public  void userlogin() {
+        if(usernameLoginInput.getText().toString().trim().equals("") || passwordLoginInput.getText().toString().trim().equals("")){
+            showErrDiag("用户名或密码不能为空");
+        }else{
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        OkHttpClient client = new OkHttpClient();
+                        RequestBody loginRequestBody = new FormBody.Builder()
+                                .add("username",usernameLoginInput.getText().toString())
+                                .add("password",passwordLoginInput.getText().toString())
+                                .build();
+                        Request loginrequest = new Request.Builder().url("http://192.168.1.110:5000/login").post(loginRequestBody).build();
+                        Response loginResponse = client.newCall(loginrequest).execute();
+                        String loginResponseData = loginResponse.body().string();
+                        Log.d("loginReturn",loginResponseData);
+                        loginReturn = Integer.parseInt(loginResponseData);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        loginReturn = -3;
+                    }
                 }
-            }
-        }).start();
+            }).start();
+        }
+
+    }
+    public void showErrDiag(String str){
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("出了点错误...")
+                .setContentText(str)
+                .show();
+    }
+    public void showSuccDiag(String str){
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("恭喜!")
+                .setContentText("str")
+                .show();
     }
 }

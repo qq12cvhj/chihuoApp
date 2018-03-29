@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public  class commonInfo {
+    public static int currentUserId;
     public static String httpUrl = "https://192.168.5.5:5000/";
     public static int viewChangeStatus = 0;
     public static boolean loginStatus = false;
