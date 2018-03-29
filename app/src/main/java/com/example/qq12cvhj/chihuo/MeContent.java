@@ -65,15 +65,26 @@ public class MeContent extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.userLoginBtn:
                 userlogin();
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 switch (loginReturn){
                     case -3:
                         showErrDiag("网络连接出错了");
+                        //状态回退。
+                        loginReturn = -4;
                         break;
                     case -2:
                         showErrDiag("密码错误");
+                        //状态回退。
+                        loginReturn = -4;
                         break;
                     case -1:
                         showErrDiag("用户名不存在");
+                        //状态回退。
+                        loginReturn = -4;
                         break;
                     case -4:
                         if(usernameLoginInput.getText().toString().trim().equals("") || passwordLoginInput.getText().toString().trim().equals("")){
