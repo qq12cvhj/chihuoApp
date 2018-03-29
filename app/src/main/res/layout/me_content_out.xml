@@ -33,10 +33,6 @@
             android:layout_weight="1"
             android:text="点击注册"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/testLoginText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

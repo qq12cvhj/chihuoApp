@@ -127,7 +127,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
                                 .add("username",usernameLoginInput.getText().toString())
                                 .add("password",passwordLoginInput.getText().toString())
                                 .build();
-                        Request loginrequest = new Request.Builder().url("http://192.168.1.110:5000/login").post(loginRequestBody).build();
+                        Request loginrequest = new Request.Builder().url(commonInfo.httpUrl("login")).post(loginRequestBody).build();
                         Response loginResponse = client.newCall(loginrequest).execute();
                         String loginResponseData = loginResponse.body().string();
                         Log.d("loginReturn",loginResponseData);
