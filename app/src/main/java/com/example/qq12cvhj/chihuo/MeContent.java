@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.sql.Time;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -46,6 +48,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
         View view ;
         if(commonInfo.loginStatus){
             view = inflater.inflate(R.layout.me_content_in, null, false);
+            getCurrentUserInfo();
         }
         else{
             view = inflater.inflate(R.layout.me_content_out, null, false);
@@ -127,6 +130,8 @@ public class MeContent extends Fragment implements View.OnClickListener {
                 break;
             case R.id.myInfoBtn:
                 Log.d("aaa","111");
+                Intent myinfointent = new Intent(getActivity(),myInfoActivity.class);
+                startActivity(myinfointent);
                 break;
             case R.id.myFavoriteBtn:
                 Log.d("aaa","222");
@@ -201,5 +206,31 @@ public class MeContent extends Fragment implements View.OnClickListener {
                 .setTitleText("恭喜!")
                 .setContentText("str")
                 .show();
+    }
+    public void getCurrentUserInfo(){
+        if(commonInfo.loginStatus){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        OkHttpClient client = new OkHttpClient();
+                        RequestBody getInfoRequestBody = new FormBody.Builder()
+                                .add("currentUserId",String.valueOf(commonInfo.currentUserId))
+                                .build();
+                        Request getInforequest = new Request.Builder().url(commonInfo.httpUrl("getCurrentUserInfo")).post(getInfoRequestBody).build();
+                        Response getInfoResponse = client.newCall(getInforequest).execute();
+                        String getInfoResponseData = getInfoResponse.body().string();
+                        Gson gson = new Gson();
+                        commonInfo.currentUser = gson.fromJson(getInfoResponseData,User.class);
+
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(getContext(),"获取用户信息失败",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).start();
+        }else{
+            //错误，没登录是获取不到信息的
+        }
     }
 }

@@ -12,6 +12,7 @@ public  class commonInfo {
         return "http://192.168.1.110:5000/"+url;
     }
     public static int currentUserId;
+    public static User currentUser;
     public static int viewChangeStatus = 0;
     public static boolean loginStatus = false;
     /** 说明一下这里使用全局变量的原因，主要是在菜谱一栏的点击事件中能快速定位到所点击的对象
