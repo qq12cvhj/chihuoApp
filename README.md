@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+3月31日23:00完成效果图（编辑菜谱的功能添加）
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180331_1.gif)
+
 3月29日22:00完成效果图（登出功能添加）
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180329_3.gif)
