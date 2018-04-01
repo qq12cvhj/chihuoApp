@@ -196,8 +196,8 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
             FoodTypeItem foodTypeItem = mItems.get(groupPosition);
             holder.nameView.setText(foodTypeItem.text);
             holder.descView.setText(foodTypeItem.foodTypeDescription);
-            int colorWhite = Color.parseColor("#FFFFFF");
-            int colorGray = Color.parseColor("#11EEEE");
+            int colorWhite = Color.parseColor("#ffddffdd");
+            int colorGray = Color.parseColor("#ffeeccff");
             if(groupPosition%2!=0){
                 holder.nameView.setBackgroundColor(colorWhite);
                 holder.descView.setBackgroundColor(colorWhite);
