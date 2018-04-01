@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+4月1日16:30完成效果图（浮动菜单按钮的添加，菜品编辑页面的添加）
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180401_1.gif)
+
 3月31日23:00完成效果图（编辑菜谱的功能添加）
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180331_1.gif)
