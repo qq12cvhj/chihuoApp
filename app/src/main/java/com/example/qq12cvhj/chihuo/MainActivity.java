@@ -1,5 +1,6 @@
 package com.example.qq12cvhj.chihuo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -9,11 +10,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import devlight.io.library.ntb.NavigationTabBar;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    FloatingActionButton addFoodtypeBtn;
+    FloatingActionButton addFoodBtn ;
+    FloatingActionButton addShareBtn;
     private android.support.v4.app.FragmentManager fm;
     private android.support.v4.app.FragmentTransaction ft;
     @Override
@@ -23,10 +30,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!=null){
-            actionBar.setTitle("吃货");
+            actionBar.hide();
         }
         initViews();
+
     }
+
+    @Override
+    protected void onResume() {
+        addFoodtypeBtn=findViewById(R.id.button_add_new_foodtype);
+        addFoodtypeBtn.setIcon(R.drawable.ic_fab_star);
+        addFoodtypeBtn.setOnClickListener(this);
+        addFoodBtn = findViewById(R.id.button_add_new_food);
+        addFoodBtn.setIcon(R.drawable.ic_fab_star);
+        addFoodBtn.setOnClickListener(this);
+        addShareBtn = findViewById(R.id.button_add_new_share);
+        addShareBtn.setIcon(R.drawable.ic_fab_star);
+        addShareBtn.setOnClickListener(this);
+        super.onResume();
+    }
+
     public void initViews(){
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(5);
@@ -178,6 +201,30 @@ public class MainActivity extends AppCompatActivity {
 
         /** 将viewPager和底部菜单栏相连接 */
         navigationTabBar.setViewPager(viewPager, 0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_add_new_share:
+                toastShow("正在开发中……");
+                break;
+            case R.id.button_add_new_foodtype:
+                toastShow("正在开发中……");
+                break;
+            case R.id.button_add_new_food:
+                if(commonInfo.loginStatus){
+                    Intent addFoodIntent = new Intent(this,addNewFoodActivity.class);
+                    startActivity(addFoodIntent);
+                }else{
+                    toastShow("您还没有登录");
+                }
+
+                break;
+        }
+    }
+    private void toastShow(String str){
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="#212222">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="吃货"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="#fff" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_horizontal_ntb"
@@ -13,19 +33,69 @@
         android:layout_weight="8"/>
 
 
-    <devlight.io.library.ntb.NavigationTabBar
-        android:id="@+id/ntb_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:ntb_badge_gravity="top"
-        app:ntb_badge_position="right"
-        app:ntb_badged="true"
-        app:ntb_scaled="true"
-        app:ntb_swiped="true"
-        app:ntb_tinted="true"
-        app:ntb_title_mode="all"
-        app:ntb_titled="true" />
+        <devlight.io.library.ntb.NavigationTabBar
+            android:id="@+id/ntb_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:ntb_badge_gravity="top"
+            app:ntb_badge_position="right"
+            app:ntb_badged="true"
+            app:ntb_scaled="true"
+            app:ntb_swiped="true"
+            app:ntb_tinted="true"
+            app:ntb_title_mode="all"
+            app:ntb_titled="true" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/multiple_actions_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            fab:fab_addButtonColorNormal="@color/white"
+            fab:fab_addButtonColorPressed="@color/white_pressed"
+            fab:fab_addButtonPlusIconColor="@color/half_black"
+            fab:fab_addButtonSize="mini"
+            fab:fab_expandDirection="down"
+            fab:fab_labelStyle="@style/menu_labels_style">
 
 
-</LinearLayout>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add_new_foodtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/half_black"
+                fab:fab_colorPressed="@color/half_black"
+                fab:fab_title="添加新的菜系" />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add_new_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/blue_btn_bg_color"
+                fab:fab_colorPressed="@color/blue_btn_bg_pressed_color"
+                app:fab_title="添加新的菜品"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add_new_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/red_btn_bg_color"
+                fab:fab_colorPressed="@color/red_btn_bg_pressed_color"
+                fab:fab_title="发布新的分享" />
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </RelativeLayout>
+
+</FrameLayout>
