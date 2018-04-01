@@ -114,11 +114,11 @@ public class addNewFoodActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.addFoodSubmitBtn:
-                cookbookEditWebView.evaluateJavascript("javaScript:callSubmit()",new ValueCallback<String>() {
+                cookbookEditWebView.evaluateJavascript("javaScript:callSubmit("+commonInfo.currentUserId+")",new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
                         //此处为 js 返回的结果
-                        Log.d("test",value);
+                        Log.d("testaaaaa",value);
                     }
                 });
 
