@@ -9,7 +9,7 @@ import java.util.List;
 
 public  class commonInfo {
     public static String httpUrl(String url) {
-        return "http://192.168.1.110:5000/"+url;
+        return "http://192.168.1.101:5000/"+url;
     }
     public static int currentUserId;
     public static User currentUser;

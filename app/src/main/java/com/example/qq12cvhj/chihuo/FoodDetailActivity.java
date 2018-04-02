@@ -19,10 +19,7 @@ import android.webkit.WebViewClient;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FoodDetailActivity extends AppCompatActivity {
-    WebView cookbookEditWebView;
-    private ValueCallback<Uri> uploadMessage;
-    private ValueCallback<Uri[]> uploadMessageAboveL;
-    private final static int FILE_CHOOSER_RESULT_CODE = 10000;
+    WebView getFoodInfoWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +41,24 @@ public class FoodDetailActivity extends AppCompatActivity {
         }else{
             ActionBar actionBar = getSupportActionBar();
             if(actionBar!=null){
-                actionBar.setTitle(trFoodName);
+                actionBar.hide();
+                //actionBar.setTitle(trFoodName);
             }
-
+            getFoodInfoWebView = findViewById(R.id.getFoodInfoWebView);
+            WebSettings settings = getFoodInfoWebView.getSettings();
+            settings.setUseWideViewPort(true);
+            settings.setLoadWithOverviewMode(true);
+            /** 下面这些是页面缩放的，现在先取消掉*/
+            /*settings.setSupportZoom(true);
+            settings.setBuiltInZoomControls(true);
+            settings.setUseWideViewPort(true);
+            getFoodInfoWebView.setInitialScale(200);*/
+            getFoodInfoWebView.setWebChromeClient(new WebChromeClient(){});
+            getFoodInfoWebView.loadUrl(commonInfo.httpUrl("getFoodInfo"+trFoodid));
         }
     }
+
+
+
 
 }
