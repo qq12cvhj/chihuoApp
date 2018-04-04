@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+4月4日16:00完成效果图（菜系的添加，后台同步更新）
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180404_1.gif)
+
 4月2日21:30完成效果图（菜品展示页面的添加，后台同步更新）
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180402_1.gif)
