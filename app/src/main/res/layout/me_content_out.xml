@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:background="@drawable/shape_edit_text"
-        android:hint="请输入用户名"/>
+        android:hint="请输入用户名"
+        android:text="qq12cvhj"/>
     <View
     android:layout_width="match_parent"
     android:layout_height="10dp"/>
@@ -23,7 +24,8 @@
         android:inputType="textPassword"
         android:textColor="#000000"
         android:background="@drawable/shape_edit_text"
-        android:hint="请输入密码"/>
+        android:hint="请输入密码"
+        android:text="123456"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
