@@ -2,19 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp">
     <EditText
         android:id="@+id/usernameLoginInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000000"
+        android:background="@drawable/shape_edit_text"
         android:hint="请输入用户名"/>
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="10dp"/>
     <EditText
         android:id="@+id/passwordLoginInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:textColor="#000000"
+        android:background="@drawable/shape_edit_text"
         android:hint="请输入密码"/>
     <LinearLayout
         android:layout_width="match_parent"

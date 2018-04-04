@@ -19,6 +19,7 @@
             android:hint="搜索美食"
             android:textColor="#000000"
             android:textColorHint="#999999"
+            android:background="@drawable/shape_edit_text"
             app:biu_duration="800"
             app:biu_text_color="@android:color/black"
             app:biu_text_scale="1.5"

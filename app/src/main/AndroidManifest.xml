@@ -25,7 +25,8 @@
         <activity android:name=".FoodDetailActivity" />
         <activity android:name=".RegActivity" />
         <activity android:name=".myInfoActivity" />
-        <activity android:name=".addNewFoodActivity"></activity>
+        <activity android:name=".addNewFoodActivity" />
+        <activity android:name=".AddNewFoodTypeActivity"></activity>
     </application>
 
 </manifest>

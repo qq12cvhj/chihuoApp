@@ -1,5 +1,6 @@
 package com.example.qq12cvhj.chihuo;
 
+import android.annotation.SuppressLint;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,8 +49,8 @@ public class myInfoActivity extends AppCompatActivity implements View.OnClickLis
         initViews();
         super.onStart();
     }
+    @SuppressLint("ResourceAsColor")
     private void initViews(){
-
         userNameEdit.setText(commonInfo.currentUser.getUsername());
         userNameEdit.setEnabled(false);
         nickNameEdit.setText(commonInfo.currentUser.getNickname());

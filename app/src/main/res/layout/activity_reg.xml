@@ -6,21 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.qq12cvhj.chihuo.RegActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
     <EditText
         android:id="@+id/usernameRegInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_edit_text"
         android:hint="请输入要注册的账户名"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
     <EditText
         android:id="@+id/passwordRegInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_edit_text"
         android:hint="请输入密码"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
     <EditText
         android:id="@+id/nicknameRegInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_edit_text"
         android:hint="请输入昵称"/>
     <LinearLayout
         android:layout_width="match_parent"

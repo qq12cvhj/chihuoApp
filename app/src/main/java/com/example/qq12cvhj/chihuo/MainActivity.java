@@ -210,7 +210,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toastShow("正在开发中……");
                 break;
             case R.id.button_add_new_foodtype:
-                toastShow("正在开发中……");
+                if(commonInfo.loginStatus){
+                    Intent addFoodTypeIntent;
+                    addFoodTypeIntent = new Intent(this,AddNewFoodTypeActivity.class);
+                    startActivity(addFoodTypeIntent);
+                }else{
+                    toastShow("您还没有登录");
+                }
+
                 break;
             case R.id.button_add_new_food:
                 if(commonInfo.loginStatus){
