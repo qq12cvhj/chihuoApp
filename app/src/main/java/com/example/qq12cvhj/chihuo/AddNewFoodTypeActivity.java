@@ -71,15 +71,11 @@ public class AddNewFoodTypeActivity extends AppCompatActivity implements View.On
             int responseData = Integer.parseInt(response.body().string());
             switch(responseData){
                 case -1:
-                    pDialog.setTitleText("创建失败，因为,,,!")
+                    pDialog.setTitleText("创建失败，请重试!")
                             .setConfirmText("好的")
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                     break;
-                case -2:
-                    pDialog.setTitleText("创建失败,因为,,,!")
-                            .setConfirmText("好的")
-                            .changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                    break;
+
                 case 0:
                     pDialog.setTitleText("创建成功!")
                             .setConfirmText("OK")
