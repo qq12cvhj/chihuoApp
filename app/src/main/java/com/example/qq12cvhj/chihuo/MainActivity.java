@@ -11,9 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.getbase.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import devlight.io.library.ntb.NavigationTabBar;
 
@@ -52,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void initViews(){
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
-        viewPager.setOffscreenPageLimit(5);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 5;
+                return 4;
             }
 
             @Override
@@ -103,12 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ft.commit();
                         container.addView(view);
                         break;
-                    //设置fragment
-                    case 4:
-                        view = LayoutInflater.from(
-                                getBaseContext()).inflate(R.layout.setting_fragment, null, false);
-                        container.addView(view);
-                        break;
                 }
                 return view;
             }
@@ -147,14 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Color.parseColor("#00F5FF"))
                         .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
                         .title("自己")
-                        .build()
-        );
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.mipmap.ic_launcher),
-                        Color.parseColor("#9400D3"))
-                        .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
-                        .title("设置")
                         .build()
         );
         navigationTabBar.setModels(models);
