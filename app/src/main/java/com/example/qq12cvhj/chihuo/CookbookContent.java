@@ -3,12 +3,14 @@ package com.example.qq12cvhj.chihuo;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
@@ -24,6 +28,9 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.james.biuedittext.BiuEditText;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by qq12cvhj on 2018/3/18.
@@ -34,9 +41,13 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
     public Button searchFoodBtn;
     private RecyclerView recyclerView;
     private RecyclerViewExpandableItemManager expMgr;
+    private Gson gson;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //保证可以在主线程中使用okhttp
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         View view = inflater.inflate(R.layout.cookbook_content, container, false);
         recyclerView = view.findViewById(R.id.recycler_cookbook);
         searchFoodBtn = view.findViewById(R.id.foodSearchBtn);
@@ -58,14 +69,56 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
-        commonInfo.getAndSetFoodInfo();
-
+        gson = new Gson();
+        //commonInfo.getAndSetFoodInfo();
+        getTypeList();
         RecyclerViewExpandableItemManager expMgr = new RecyclerViewExpandableItemManager(null);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(expMgr.createWrappedAdapter(new MyAdapter()));
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         expMgr.attachRecyclerView(recyclerView);
         super.onResume();
+    }
+    /** 取得所有的菜系列表，其中每个菜系下还有一个菜品列表*/
+    public void getTypeList(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(commonInfo.httpUrl("getFoodTypeList"))
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String resonseData = response.body().string();
+                    Log.d("responseData",resonseData);
+                    commonInfo.foodTypeList = gson.fromJson(resonseData,new TypeToken<List<FoodTypeInfo>>(){}.getType());
+                    for(FoodTypeInfo fti : commonInfo.foodTypeList){
+                        fti.foodInfoList = getFoodList(fti.foodTypeId);
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).run();
+    }
+    /** 取得一个菜系下的所有菜品列表*/
+    public List<FoodInfo> getFoodList(int foodTypeId){
+        List<FoodInfo> foodlist = new ArrayList<>();
+        try{
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(commonInfo.httpUrl("getFoodList"+foodTypeId))
+                    .build();
+            Response response = client.newCall(request).execute();
+            String resonseData = response.body().string();
+            Log.d("responseData",resonseData);
+            foodlist = gson.fromJson(resonseData,new TypeToken<List<FoodInfo>>(){}.getType());
+            return foodlist;
+        }catch(Exception e){
+            e.printStackTrace();
+            return foodlist;
+        }
     }
 
     @Override
@@ -146,13 +199,14 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
 
             mItems = new ArrayList<>();
             for (int i = 0; i < commonInfo.foodTypeList.size(); i++) {
-                FoodTypeItem group = new FoodTypeItem(commonInfo.foodTypeList.get(i).typeId, commonInfo.foodTypeList.get(i).typeName,commonInfo.foodTypeList.get(i).description);
+                FoodTypeItem group = new FoodTypeItem(commonInfo.foodTypeList.get(i).foodTypeId, commonInfo.foodTypeList.get(i).foodTypeName,commonInfo.foodTypeList.get(i).foodTypeDesc);
                 for (int j = 0;j < commonInfo.foodTypeList.get(i).foodInfoList.size(); j++) {
                     group.foodItems.add(new FoodItem(commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodId, commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodName ,commonInfo.foodTypeList.get(i).foodInfoList.get(j).foodAuthor));
                 }
                 mItems.add(group);
             }
         }
+
         //这个不需要动
         @Override
         public int getGroupCount() {

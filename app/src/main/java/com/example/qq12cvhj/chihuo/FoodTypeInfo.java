@@ -8,15 +8,15 @@ import java.util.List;
  */
 
 public class FoodTypeInfo {
-    int typeId;
-    String typeName;
-    String description;
+    int foodTypeId;
+    String foodTypeName;
+    String foodTypeDesc;
     List<FoodInfo> foodInfoList ;
 
     public FoodTypeInfo(int typeId, String typeName,String description) {
-        this.typeId = typeId;
-        this.typeName = typeName;
-        this.description = description;
+        this.foodTypeId = typeId;
+        this.foodTypeName = typeName;
+        this.foodTypeDesc = description;
         this.foodInfoList = new ArrayList<>();
     }
 

@@ -20,7 +20,8 @@ public  class commonInfo {
      * 用来模拟，实际使用中主要通过网络，从数据库服务器中获取内容。
      * */
     public static List<FoodTypeInfo> foodTypeList = new ArrayList<>();
-    public static void getAndSetFoodInfo(){
+    /** 下面是使用数组和列表对菜品进行模拟的代码，现在已弃用*/
+    /*public static void getAndSetFoodInfo(){
         foodTypeList = new ArrayList<>();
         for(int i = 0;i < 30;i++){
             commonInfo.foodTypeList.add( new FoodTypeInfo(i,"菜系"+(i),"没有描述"));
@@ -28,6 +29,6 @@ public  class commonInfo {
                 commonInfo.foodTypeList.get(i).foodInfoList.add(new FoodInfo((i*5+j),"qq12cvhj","菜品"+String.valueOf(i*5+j)));
             }
         }
-    }
+    }*/
 
 }
