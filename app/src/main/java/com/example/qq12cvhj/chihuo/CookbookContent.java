@@ -246,8 +246,8 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
         }
         //这个在定义完菜系之后进行相应的修改
         @Override
-        public void onBindGroupViewHolder(FoodTypeViewHolder holder, int groupPosition, int viewType) {
-            FoodTypeItem foodTypeItem = mItems.get(groupPosition);
+        public void onBindGroupViewHolder(FoodTypeViewHolder holder, final int groupPosition, int viewType) {
+            final FoodTypeItem foodTypeItem = mItems.get(groupPosition);
             holder.nameView.setText(foodTypeItem.text);
             holder.descView.setText(foodTypeItem.foodTypeDescription);
             int colorWhite = Color.parseColor("#ffddffdd");
@@ -259,6 +259,25 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
                 holder.nameView.setBackgroundColor(colorGray);
                 holder.descView.setBackgroundColor(colorGray);
             }
+            holder.nameView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(getChildCount(groupPosition)==0){
+                        toastShow("此菜系下没有菜品哦，快去添加吧！");
+                    }
+                }
+            });
+            holder.descView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(getChildCount(groupPosition)==0){
+                        toastShow("此菜系下没有菜品哦，快去添加吧！");
+                    }
+                }
+            });
+        }
+        private void toastShow(String str){
+            Toast.makeText(getActivity(),str,Toast.LENGTH_SHORT).show();
         }
         //这个在定义完菜品之后进行相应的修改
         @Override
