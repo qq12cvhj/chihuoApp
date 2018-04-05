@@ -17,12 +17,15 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class addNewFoodActivity extends AppCompatActivity implements View.OnClickListener {
     WebView cookbookEditWebView;
     private Button addFoodSubmitBtn;
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
     private final static int FILE_CHOOSER_RESULT_CODE = 10000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +121,8 @@ public class addNewFoodActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onReceiveValue(String value) {
                         //此处为 js 返回的结果
-                        Log.d("testaaaaa",value);
                     }
                 });
-
                 break;
         }
     }
