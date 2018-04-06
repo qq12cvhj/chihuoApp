@@ -9,7 +9,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -17,7 +16,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class addNewFoodActivity extends AppCompatActivity implements View.OnClickListener {
     WebView cookbookEditWebView;
