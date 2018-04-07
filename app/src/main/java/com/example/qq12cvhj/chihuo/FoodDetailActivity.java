@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.CipherSuite;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -31,7 +33,6 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
     WebView getFoodInfoWebView;
     Button starBtn;
     int trFoodid;
-    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +73,13 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
 
             if(!commonInfo.loginStatus){
                 starBtn.setText("登录收藏");
+                starBtn.setBackgroundResource(R.drawable.shape_white_button);
             }else{
                 if(starStatus(commonInfo.currentUserId,trFoodid)){
+                    starBtn.setBackgroundResource(R.drawable.red_button_background);
                     starBtn.setText("取消收藏");
                 }else{
+                    starBtn.setBackgroundResource(R.drawable.shape_white_button);
                     starBtn.setText("点击收藏");
                 }
 
@@ -154,10 +158,12 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
             case R.id.starBtn:
                 if(starBtn.getText().equals("点击收藏")){
                     starOrCancel(trFoodid,commonInfo.currentUserId);
+                    starBtn.setBackgroundResource(R.drawable.red_button_background);
                     starBtn.setText("取消收藏");
                 }else if(starBtn.getText().equals("取消收藏")){
                     starOrCancel(trFoodid,commonInfo.currentUserId);
                     starBtn.setText("点击收藏");
+                    starBtn.setBackgroundResource(R.drawable.shape_white_button);
                 }else{
                     toastShow("登录后才能收藏哈！！");
                 }
