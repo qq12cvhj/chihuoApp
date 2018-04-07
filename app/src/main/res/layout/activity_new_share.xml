@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.qq12cvhj.chihuo.NewShareActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#222222">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="分享"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/pubShareBtn"
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:textSize="11sp"
+            android:text="发布"
+            android:background="@drawable/shape_white_button"
+             />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <WebView
+                android:id="@+id/shareEditWebview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </WebView>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

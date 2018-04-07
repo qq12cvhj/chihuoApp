@@ -191,7 +191,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_add_new_share:
-                toastShow("正在开发中……");
+                if(commonInfo.loginStatus){
+                    Intent newShareIntent;
+                    newShareIntent = new Intent(this,NewShareActivity.class);
+                    startActivity(newShareIntent);
+                }else{
+                    toastShow("您还没有登录");
+                }
                 break;
             case R.id.button_add_new_foodtype:
                 if(commonInfo.loginStatus){
