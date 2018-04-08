@@ -15,7 +15,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-
+import android.widget.Toast;
 
 
 public class addNewFoodActivity extends AppCompatActivity implements View.OnClickListener {
@@ -120,9 +120,13 @@ public class addNewFoodActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onReceiveValue(String value) {
                         //此处为 js 返回的结果
+
                     }
                 });
                 break;
         }
+    }
+    private void toastShow(String str){
+        Toast.makeText(this,str,Toast.LENGTH_SHORT);
     }
 }

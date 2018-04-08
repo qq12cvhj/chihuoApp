@@ -126,6 +126,19 @@ public class NewShareActivity extends AppCompatActivity implements View.OnClickL
                         public void onReceiveValue(String value) {
                             //此处为 js 返回的结果
                             Log.d("ReturnValue",value);
+
+                            switch (value){
+                                case "\"0\"":
+                                    toastShow("发表成功！");
+                                    finish();
+                                    break;
+                                case "\"-1\"":
+                                    toastShow("发表失败，请重试");
+                                    break;
+                                case "\"-2\"":
+                                    toastShow("请输入标题");
+                                    break;
+                            }
                         }
                     });
                     break;

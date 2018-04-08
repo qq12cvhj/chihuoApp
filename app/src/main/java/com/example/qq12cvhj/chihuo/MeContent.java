@@ -57,7 +57,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
         if(commonInfo.loginStatus){
             myInfoBtn = (Button) getView().findViewById(R.id.myInfoBtn);
             myInfoBtn.setOnClickListener(this);
@@ -77,7 +77,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
             userLoginBtn.setOnClickListener(this);
             login2RegBtn.setOnClickListener(this);
         }
-        super.onStart();
+        super.onResume();
     }
 
     @Override
