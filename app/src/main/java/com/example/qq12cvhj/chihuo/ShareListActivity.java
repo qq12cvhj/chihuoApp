@@ -3,8 +3,11 @@ package com.example.qq12cvhj.chihuo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ShareListActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class ShareListActivity extends AppCompatActivity {
+    private List<ShareInfo> shareInfoList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

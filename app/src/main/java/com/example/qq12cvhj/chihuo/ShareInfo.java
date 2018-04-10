@@ -1,8 +1,6 @@
 package com.example.qq12cvhj.chihuo;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,6 +12,7 @@ public class ShareInfo {
     public int shareId;
     public int shareTitle;
     public int shareAuthor;
+    public String shareTitleImg;
     public Date pubDate;
     @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat sdft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
@@ -22,6 +21,8 @@ public class ShareInfo {
         this.shareId = shareId;
         this.shareTitle = shareTitle;
         this.shareAuthor = shareAuthor;
-        this.pubTimeStr = pubTimeStr ;
+        this.pubTimeStr = pubTimeStr;
+        //默认先置空
+        this.shareTitleImg = null;
     }
 }
