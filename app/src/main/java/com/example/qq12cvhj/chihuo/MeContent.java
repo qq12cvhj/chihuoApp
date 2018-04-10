@@ -37,6 +37,7 @@ public class MeContent extends Fragment implements View.OnClickListener {
     Button myInfoBtn;
     Button myFavoriteBtn;
     Button myDesignBtn;
+    Button myShareBtn;
     Button myFollowBtn;
     Button logoutBtn;
     FragmentManager fm;
@@ -65,6 +66,8 @@ public class MeContent extends Fragment implements View.OnClickListener {
             myFavoriteBtn.setOnClickListener(this);
             myDesignBtn =(Button) getView().findViewById(R.id.myDesignBtn);
             myDesignBtn.setOnClickListener(this);
+            myShareBtn = (Button)getView().findViewById(R.id.myShareBtn);
+            myShareBtn.setOnClickListener(this);
             myFollowBtn = (Button)getView().findViewById(R.id.myFollowBtn);
             myFollowBtn.setOnClickListener(this);
             logoutBtn = (Button)getView().findViewById(R.id.logoutBtn);
@@ -137,10 +140,17 @@ public class MeContent extends Fragment implements View.OnClickListener {
                 Log.d("aaa","222");
                 break;
             case R.id.myDesignBtn:
+                commonInfo.viewChangeStatus = 3;
+                Intent designIntent = new Intent(getActivity(),SearchFoodActivity.class);
+                designIntent.putExtra("userId",commonInfo.currentUserId);
                 Log.d("aaa","333");
+                startActivity(designIntent);
+                break;
+            case R.id.myShareBtn:
+                Log.d("aaa","444");
                 break;
             case R.id.myFollowBtn:
-                Log.d("aaa","444");
+                Log.d("aaa","555");
                 break;
             case R.id.logoutBtn:
                 new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
