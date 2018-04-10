@@ -15,21 +15,36 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:screenOrientation="portrait"
-            android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchFoodActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".FoodDetailActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".RegActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".myInfoActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".addNewFoodActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".AddNewFoodTypeActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".NewShareActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SearchFoodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FoodDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".addNewFoodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddNewFoodTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewShareActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ShareListActivity"></activity>
     </application>
 
 </manifest>
