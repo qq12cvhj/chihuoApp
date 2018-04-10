@@ -44,6 +44,13 @@ public class SearchFoodActivity extends AppCompatActivity {
                 }
                 break;
             case 2:
+                int aid = intent.getIntExtra("userId",-1);
+                if (aid == -1){
+                    toastShow("获取用户id失败");
+                    finish();
+                }else{
+                    foodSearchList = getFavoList(aid);
+                }
                 break;
             case 3:
                 int authodid = intent.getIntExtra("userId",-1);
@@ -90,6 +97,24 @@ public class SearchFoodActivity extends AppCompatActivity {
             return foodlist;
         }
     }
+    public List<FoodInfo> getFavoList(int foodAuthorId){
+        List<FoodInfo> foodlist = new ArrayList<>();
+        try{
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(commonInfo.httpUrl("getFavoList"+foodAuthorId))
+                    .build();
+            Response response = client.newCall(request).execute();
+            String resonseData = response.body().string();
+            Log.d("responseData",resonseData);
+            foodlist = gson.fromJson(resonseData,new TypeToken<List<FoodInfo>>(){}.getType());
+            return foodlist;
+        }catch(Exception e){
+            e.printStackTrace();
+            return foodlist;
+        }
+    }
+
     private void toastShow(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
