@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+4月11日22:00完成效果图（分享内容的缩略图列表展示、分享详细内容的查看）
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180411_1.gif)
+
 4月6日00:00完成效果图（菜系、菜品浏览列表与数据库同步，取消数组模拟）
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180406_1.gif)
