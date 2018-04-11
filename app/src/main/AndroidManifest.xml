@@ -44,7 +44,9 @@
         <activity
             android:name=".NewShareActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ShareListActivity"></activity>
+        <activity
+            android:name=".ShareListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -10,14 +10,16 @@ import java.util.Date;
 
 public class ShareInfo {
     public int shareId;
-    public int shareTitle;
-    public int shareAuthor;
+    public String shareTitle;
+    public String shareAuthor;
     public String shareTitleImg;
+    public String pubTimeStr;
     public Date pubDate;
-    @SuppressLint("SimpleDateFormat")
-    public SimpleDateFormat sdft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-    public String pubTimeStr = sdft.format(pubDate);
-    public ShareInfo(int shareId, int shareTitle, int shareAuthor, String pubTimeStr) {
+    //@SuppressLint("SimpleDateFormat")
+    //public SimpleDateFormat sdft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+    //public String pubTimeStr = sdft.format(pubDate);
+
+    public ShareInfo(int shareId, String shareTitle, String shareAuthor, String pubTimeStr) {
         this.shareId = shareId;
         this.shareTitle = shareTitle;
         this.shareAuthor = shareAuthor;

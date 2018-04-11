@@ -30,6 +30,7 @@ public class FoodInfoAdapter extends ArrayAdapter<FoodInfo> {
         @SuppressLint("ViewHolder") View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
         TextView idText = (TextView) view.findViewById(R.id.search_food_id);
         TextView nameText = (TextView) view.findViewById(R.id.search_food_name);
+        assert foodInfo != null;
         idText.setText(String.valueOf(foodInfo.foodId));
         nameText.setText(foodInfo.foodName);
         return view;
