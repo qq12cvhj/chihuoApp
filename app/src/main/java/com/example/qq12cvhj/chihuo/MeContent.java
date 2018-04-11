@@ -151,8 +151,9 @@ public class MeContent extends Fragment implements View.OnClickListener {
                 startActivity(designIntent);
                 break;
             case R.id.myShareBtn:
-                Intent intent1 = new Intent(getActivity(),ShareListActivity.class);
-                startActivity(intent1);
+                Intent shareIntent = new Intent(getActivity(),ShareListActivity.class);
+                shareIntent.putExtra("userId",commonInfo.currentUserId);
+                startActivity(shareIntent);
                 Log.d("aaa","444");
                 break;
             case R.id.myFollowBtn:
