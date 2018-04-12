@@ -121,9 +121,11 @@ public class MeContent extends Fragment implements View.OnClickListener {
                         commonInfo.currentUserId = loginReturn;
                         commonInfo.loginStatus = true;
                         MeContent newMecontent = new MeContent();
+                        FriendContent newFriendcontent = new FriendContent();
                         fm = getActivity().getSupportFragmentManager();
                         ft = fm.beginTransaction();
                         ft.replace(R.id.me_fragment,newMecontent);
+                        ft.replace(R.id.friend_fragment,newFriendcontent);
                         ft.commit();
                 }
                 break;
@@ -170,9 +172,11 @@ public class MeContent extends Fragment implements View.OnClickListener {
                                 commonInfo.loginStatus = false;
                                 commonInfo.currentUserId = -1;
                                 MeContent newMecontent1 = new MeContent();
+                                FriendContent friendContent1 = new FriendContent();
                                 fm = getFragmentManager();
                                 ft = fm.beginTransaction();
                                 ft.replace(R.id.me_fragment,newMecontent1);
+                                ft.replace(R.id.friend_fragment,friendContent1);
                                 ft.commit();
                                 sDialog.setTitleText("退出成功!")
                                         .setContentText("信息不再保留，请重新登录!")
