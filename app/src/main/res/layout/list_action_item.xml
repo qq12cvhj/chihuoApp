@@ -7,7 +7,9 @@
     <TextView
         android:id="@+id/list_action_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +17,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/shape_edit_text"
+        android:background="@drawable/shape_gray_text"
         >
         <ImageView
             android:id="@+id/list_action_img"
@@ -25,6 +27,7 @@
             android:id="@+id/list_action_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:textSize="20sp"
             android:textColor="@color/black_semi_transparent"
@@ -37,6 +40,7 @@
         android:layout_marginLeft="20dp"
         android:textSize="10sp"
         android:textColor="@color/message_color"
+        android:layout_marginBottom="10dp"
         tools:ignore="SmallSp" />
     <View
         android:layout_width="match_parent"

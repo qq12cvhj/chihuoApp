@@ -2,6 +2,7 @@ package com.example.qq12cvhj.chihuo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +52,9 @@ public class ActionAdapter extends ArrayAdapter<UserAction>{
                     @Override
                     public void onClick(View v) {
                         toastShow("前往菜品"+userAction.objectId);
+                        Intent intent1 = new Intent(getContext(),FoodDetailActivity.class);
+                        intent1.putExtra("trFoodid",userAction.objectId);
+                        getContext().startActivity(intent1);
                     }
                 });
                 break;
@@ -60,6 +64,9 @@ public class ActionAdapter extends ArrayAdapter<UserAction>{
                     @Override
                     public void onClick(View v) {
                         toastShow("前往分享"+userAction.objectId);
+                        Intent intent2 = new Intent(getContext(),ShareDetailActivity.class);
+                        intent2.putExtra("trShareId",userAction.objectId);
+                        getContext().startActivity(intent2);
                     }
                 });
                 break;
@@ -69,6 +76,9 @@ public class ActionAdapter extends ArrayAdapter<UserAction>{
                     @Override
                     public void onClick(View v) {
                         toastShow("前往菜品"+userAction.objectId);
+                        Intent intent3 = new Intent(getContext(),FoodDetailActivity.class);
+                        intent3.putExtra("trFoodid",userAction.objectId);
+                        getContext().startActivity(intent3);
                     }
                 });
                 break;

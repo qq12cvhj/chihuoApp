@@ -12,7 +12,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/shape_edit_text"
+        android:background="@drawable/shape_gray_text"
         >
         <ImageView
             android:id="@+id/list_share_img"
