@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -33,6 +34,7 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
     WebView getFoodInfoWebView;
     Button starBtn;
     int trFoodid;
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +65,31 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
             WebSettings settings = getFoodInfoWebView.getSettings();
             settings.setUseWideViewPort(true);
             settings.setLoadWithOverviewMode(true);
+            settings.setJavaScriptEnabled(true);
+
             /** 下面这些是页面缩放的，现在先取消掉*/
             /*settings.setSupportZoom(true);
             settings.setBuiltInZoomControls(true);
             settings.setUseWideViewPort(true);
             getFoodInfoWebView.setInitialScale(200);*/
-            getFoodInfoWebView.setWebChromeClient(new WebChromeClient(){});
+            getFoodInfoWebView.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    Uri uri = Uri.parse(url);
+                    if(uri.getScheme().equals("js")){
+                        if(uri.getAuthority().equals("webview")){
+                            int jsUsrId = Integer.parseInt(uri.getQueryParameter("userId"));
+                            Intent usrHomeIntent = new Intent(getApplicationContext(),UserHomeActivity.class);
+                            usrHomeIntent.putExtra("trUserId",jsUsrId);
+                            Log.d("yonghuid", String.valueOf(jsUsrId));
+                            getApplicationContext().startActivity(usrHomeIntent);
+                        }
+                    }
+                    //return super.shouldOverrideUrlLoading(view, url);
+                    return true;
+                }
+            });
             getFoodInfoWebView.loadUrl(commonInfo.httpUrl("getFoodInfo"+trFoodid));
-
             if(!commonInfo.loginStatus){
                 starBtn.setText("登录收藏");
                 starBtn.setBackgroundResource(R.drawable.shape_white_button);
@@ -174,4 +193,5 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
     private void toastShow(String str){
         Toast.makeText(this,str, Toast.LENGTH_SHORT).show();
     }
+
 }

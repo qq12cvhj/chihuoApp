@@ -47,8 +47,13 @@
         <activity
             android:name=".ShareListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ShareDetailActivity"
+        <activity
+            android:name=".ShareDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserHomeActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
