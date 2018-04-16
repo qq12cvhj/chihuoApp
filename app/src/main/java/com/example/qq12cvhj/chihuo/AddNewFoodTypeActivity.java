@@ -1,6 +1,7 @@
 package com.example.qq12cvhj.chihuo;
 
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,10 @@ public class AddNewFoodTypeActivity extends AppCompatActivity implements View.On
         StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_type);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.hide();
+        }
         foodTypeInput = findViewById(R.id.foodTypeInput);
         descInput = findViewById(R.id.descInput);
         addFoodTypeBtn = findViewById(R.id.addFoodTypeBtn);

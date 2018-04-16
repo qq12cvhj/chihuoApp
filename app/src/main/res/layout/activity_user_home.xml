@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/nickNameShow"
@@ -31,7 +32,7 @@
                 android:id="@+id/hisDesignsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/shape_white_button"
+                android:background="@drawable/shape_edit_text"
                 android:text="查看他上传的菜品" />
         </LinearLayout>
         <LinearLayout
@@ -57,22 +58,24 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
-                android:visibility="invisible"
                 android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/shareImg_2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:visibility="invisible"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/shareImg_3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:visibility="invisible" />
+                android:layout_marginStart="10dp" />
+            <ImageView
+                android:id="@+id/moreShrBtn"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:src="@drawable/navigate_right" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +86,7 @@
                 android:id="@+id/watchBtn_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/shape_white_button"
+                android:background="@drawable/shape_green_button"
                 android:text="关注此人"/>
         </LinearLayout>
         <LinearLayout

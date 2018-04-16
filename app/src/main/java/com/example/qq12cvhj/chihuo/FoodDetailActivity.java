@@ -79,8 +79,10 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                     if(uri.getScheme().equals("js")){
                         if(uri.getAuthority().equals("webview")){
                             int jsUsrId = Integer.parseInt(uri.getQueryParameter("userId"));
+                            String jsNickName = uri.getQueryParameter("nickName");
                             Intent usrHomeIntent = new Intent(getApplicationContext(),UserHomeActivity.class);
                             usrHomeIntent.putExtra("trUserId",jsUsrId);
+                            usrHomeIntent.putExtra("trUserNickName",jsNickName);
                             Log.d("yonghuid", String.valueOf(jsUsrId));
                             getApplicationContext().startActivity(usrHomeIntent);
                         }
