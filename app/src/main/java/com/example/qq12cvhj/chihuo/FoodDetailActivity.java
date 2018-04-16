@@ -83,6 +83,7 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                             Intent usrHomeIntent = new Intent(getApplicationContext(),UserHomeActivity.class);
                             usrHomeIntent.putExtra("trUserId",jsUsrId);
                             usrHomeIntent.putExtra("trUserNickName",jsNickName);
+                            usrHomeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                             Log.d("yonghuid", String.valueOf(jsUsrId));
                             getApplicationContext().startActivity(usrHomeIntent);
                         }
