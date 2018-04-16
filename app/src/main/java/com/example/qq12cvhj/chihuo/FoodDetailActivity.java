@@ -80,12 +80,11 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                         if(uri.getAuthority().equals("webview")){
                             int jsUsrId = Integer.parseInt(uri.getQueryParameter("userId"));
                             String jsNickName = uri.getQueryParameter("nickName");
-                            Intent usrHomeIntent = new Intent(getApplicationContext(),UserHomeActivity.class);
+                            Intent usrHomeIntent = new Intent(FoodDetailActivity.this,UserHomeActivity.class);
                             usrHomeIntent.putExtra("trUserId",jsUsrId);
                             usrHomeIntent.putExtra("trUserNickName",jsNickName);
-                            usrHomeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                             Log.d("yonghuid", String.valueOf(jsUsrId));
-                            getApplicationContext().startActivity(usrHomeIntent);
+                            startActivity(usrHomeIntent);
                         }
                     }
                     //return super.shouldOverrideUrlLoading(view, url);
