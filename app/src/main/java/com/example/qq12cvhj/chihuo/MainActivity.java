@@ -73,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case 0:
                         view = LayoutInflater.from(
                                 getBaseContext()).inflate(R.layout.home_fragment, null, false);
+                        HomeContent hc = new HomeContent();
+                        ft = fm.beginTransaction();
+                        ft.add(R.id.home_fragment,hc);
+                        ft.commit();
                         container.addView(view);
                         break;
                     //菜谱fragment
