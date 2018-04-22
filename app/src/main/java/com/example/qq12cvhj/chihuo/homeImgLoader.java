@@ -1,6 +1,7 @@
 package com.example.qq12cvhj.chihuo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -15,9 +16,10 @@ public class homeImgLoader extends ImageLoader {
 
     @Override
     public void displayImage(Context context, Object object, ImageView imageView) {
-        Log.d("responseData1",((UserAction)(object)).titleImg);
+        Log.d("trImgs",((UserAction)(object)).titleImg);
         Picasso.get()
                 .load(((UserAction)(object)).titleImg)
+                .config(Bitmap.Config.RGB_565)
                 .into(imageView);
     }
 }
