@@ -3,6 +3,10 @@
 
 这里是吃货App的安卓端页面，后台页面请见 https://github.com/jcwayd/chihuoServerEnd
 
+4月23日21:00完成效果图(推送页面采用banner轮播，信息展示设计一个滑动效果的fragment等)
+
+![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180423_1.gif)
+
 4月16日23:30完成效果图(用户之间的关注功能，其他用户个人详情页的实现等)
 
 ![Image text](https://github.com/jcwayd/chihuoApp/blob/master/imgFolder/20180416_1.gif)
