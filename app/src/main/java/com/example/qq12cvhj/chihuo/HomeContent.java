@@ -1,12 +1,16 @@
 package com.example.qq12cvhj.chihuo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mancj.slideup.SlideUp;
+import com.mancj.slideup.SlideUpBuilder;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
@@ -33,9 +39,13 @@ import okhttp3.Response;
 
 public class HomeContent extends Fragment implements OnBannerListener, View.OnClickListener {
     private Banner homebanner;
-    private ImageView homenewbtn,homehotbtn,homeuserbtn,homecookbookbtn;
+    private ImageView homenewbtn,homehotbtn,homeuserbtn,homecookbookbtn,slideCloseBtn;
+    private View testView;
+    private SlideUp slideUp;
     private List<UserAction> actionList = new ArrayList<>();
     private Gson gson;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -60,6 +70,7 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         homebanner.setOnBannerListener(this);
         homebanner.start();
     }
+    @SuppressLint("CommitTransaction")
     private void initviews(){
         initBannerViews();
         homenewbtn = getActivity().findViewById(R.id.homenewbtn);
@@ -70,6 +81,13 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         homeuserbtn.setOnClickListener(this);
         homecookbookbtn = getActivity().findViewById(R.id.homecookbookbtn);
         homecookbookbtn.setOnClickListener(this);
+        slideCloseBtn = getActivity().findViewById(R.id.slideCloseBtn);
+        slideCloseBtn.setOnClickListener(this);
+        testView = getActivity().findViewById(R.id.slideView);
+        slideUp = new SlideUpBuilder(testView)
+                .withStartState(SlideUp.State.HIDDEN)
+                .withStartGravity(Gravity.BOTTOM)
+                .build();
     }
 
     @Override
@@ -119,14 +137,33 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.homenewbtn:
-                break;
-            case R.id.homehotbtn:
+                fm = getFragmentManager();
+                ft = fm.beginTransaction();
+                HomeSlideNew hsn = new HomeSlideNew();
+                ft.replace(R.id.slide_fragment,hsn);
+                ft.commit();
+                slideUp.show();
                 break;
             case R.id.homeuserbtn:
+                fm = getFragmentManager();
+                ft = fm.beginTransaction();
+                HomeSlideUser hsu = new HomeSlideUser();
+                ft.replace(R.id.slide_fragment,hsu);
+                ft.commit();
+                slideUp.show();
+                break;
+            case R.id.homehotbtn:
+                fm = getFragmentManager();
+                ft = fm.beginTransaction();
+                HomeSlideHot hsh = new HomeSlideHot();
+                ft.replace(R.id.slide_fragment,hsh);
+                ft.commit();
+                slideUp.show();
                 break;
             case R.id.homecookbookbtn:
-                WindowManager wm1 = getActivity().getWindowManager();
-                int screenWidth = wm1.getDefaultDisplay().getWidth();
+                break;
+            case R.id.slideCloseBtn:
+                slideUp.hide();
                 break;
         }
     }
