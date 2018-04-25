@@ -8,6 +8,9 @@ public class FoodInfo {
     int foodId;
     String foodAuthor; //菜品的作者
     String foodName; //菜品名称
+    String foodImgSrc; //菜品封面图片地址
+    int starCount; //菜品的收藏人数
+    int foodAuthorId; //菜品作者的ID
 
     public FoodInfo(int foodId, String foodAuthor, String foodName) {
         this.foodId = foodId;
