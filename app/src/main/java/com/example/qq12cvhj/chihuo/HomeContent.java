@@ -29,6 +29,7 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import devlight.io.library.ntb.NavigationTabBar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -161,6 +162,9 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
                 slideUp.show();
                 break;
             case R.id.homecookbookbtn:
+                //取得底部菜单栏，setModelIndex()为底部索引，即触发点击事件。
+                NavigationTabBar navigationTabBar = getActivity().findViewById(R.id.ntb_horizontal);
+                navigationTabBar.setModelIndex(1);
                 break;
             case R.id.slideCloseBtn:
                 slideUp.hide();

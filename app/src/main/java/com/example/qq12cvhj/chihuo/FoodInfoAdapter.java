@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -27,6 +29,7 @@ public class FoodInfoAdapter extends ArrayAdapter<FoodInfo> {
         resourceId = textViewResourceId;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -43,8 +46,10 @@ public class FoodInfoAdapter extends ArrayAdapter<FoodInfo> {
         TextView authorText = (TextView)view.findViewById(R.id.search_food_author);
         assert foodInfo != null;
         //idText.setText(String.valueOf(foodInfo.foodId));
+        TextView starCountText = (TextView) view.findViewById(R.id.food_star_count);
+        starCountText.setText(foodInfo.starCount+" 人收藏");
         nameText.setText(foodInfo.foodName);
-        authorText.setText(foodInfo.foodAuthor);
+        authorText.setText("作者： "+foodInfo.foodAuthor);
         return view;
     }
 }

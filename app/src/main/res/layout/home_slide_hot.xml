@@ -7,4 +7,9 @@
         android:layout_height="wrap_content"
         android:text="热门菜品等信息将在这里展示，敬请期待。"
         android:textSize="20sp"/>
+    <ListView
+        android:id="@+id/hotFoodList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>
