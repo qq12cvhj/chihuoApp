@@ -1,7 +1,9 @@
 package com.example.qq12cvhj.chihuo;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -15,13 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
+import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
@@ -44,9 +50,11 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
     private View testView;
     private SlideUp slideUp;
     private List<UserAction> actionList = new ArrayList<>();
-    private Gson gson;
+    private Gson gson = new Gson();
     private FragmentManager fm;
     private FragmentTransaction ft;
+    private ListView guessListView;
+    private List<ShareInfo> guessList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -62,7 +70,6 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         return view;
     }
     private void initBannerViews(){
-        gson = new Gson();
         actionList = getActionList();
         homebanner = (Banner) getActivity().findViewById(R.id.home_banner);
         homebanner.setImageLoader(new homeImgLoader());
@@ -85,16 +92,67 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         slideCloseBtn = getActivity().findViewById(R.id.slideCloseBtn);
         slideCloseBtn.setOnClickListener(this);
         testView = getActivity().findViewById(R.id.slideView);
+        //中间“发现”部分的前三个项需要使用slideUp控件。
         slideUp = new SlideUpBuilder(testView)
                 .withStartState(SlideUp.State.HIDDEN)
                 .withStartGravity(Gravity.BOTTOM)
                 .build();
+        guessListView = getActivity().findViewById(R.id.guessYouList);
+        GuessShareAdapter guessShareAdapter = new GuessShareAdapter(getContext(),R.layout.guess_item,guessList);
+        guessListView.setAdapter(guessShareAdapter);
     }
+
 
     @Override
     public void onResume() {
+        guessList = getGuessList();
         initviews();
         super.onResume();
+    }
+
+    class GuessShareAdapter extends ArrayAdapter<ShareInfo>{
+        int resourceId;
+        public GuessShareAdapter(@NonNull Context context,  int textViewResourceId, @NonNull List<ShareInfo> objects) {
+            super(context, textViewResourceId, objects);
+            resourceId = textViewResourceId;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            @SuppressLint("ViewHolder") View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+            ShareInfo shareInfo = getItem(position);
+            TextView guess_title = (TextView) view.findViewById(R.id.guess_title);
+            ImageView guess_img = (ImageView) view.findViewById(R.id.guess_img);
+            TextView guess_nickname = (TextView) view.findViewById(R.id.guess_nickname);
+            guess_title.setText(shareInfo.shareTitle);
+            guess_nickname.setText(shareInfo.shareAuthor);
+            Picasso.get()
+                    .load(shareInfo.shareTitleImg)
+                    .config(Bitmap.Config.RGB_565)
+                    .into(guess_img);
+            return view;
+        }
+    }
+
+    //从网络后台获取“猜你喜欢”列表
+    private List<ShareInfo> getGuessList(){
+        List<ShareInfo> list;
+        try{
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(commonInfo.httpUrl("getGuessList"))
+                    .build();
+            Response response = client.newCall(request).execute();
+            String resonseData = response.body().string();
+            Log.d("responseData",resonseData);
+            list = gson.fromJson(resonseData,new TypeToken<List<ShareInfo>>(){}.getType());
+        }catch (Exception e){
+            e.printStackTrace();
+            list = new ArrayList<>();
+        }
+        return list;
     }
 
     private List<UserAction> getActionList(){
@@ -102,7 +160,7 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         try{
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(commonInfo.httpUrl("getActionList"))
+                    .url(commonInfo.httpUrl("getHomeActionList"))
                     .build();
             Response response = client.newCall(request).execute();
             String resonseData = response.body().string();
