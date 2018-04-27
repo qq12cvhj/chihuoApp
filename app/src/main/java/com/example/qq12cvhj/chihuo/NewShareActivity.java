@@ -73,8 +73,11 @@ public class NewShareActivity extends AppCompatActivity implements View.OnClickL
     private void openImageChooserActivity() {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("image/*");
-        startActivityForResult(Intent.createChooser(i, "Image Chooser"), FILE_CHOOSER_RESULT_CODE);
+        i.setType("*/*");
+        String[] mimeTypes = {"image/*", "video/*"};
+        i.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        //i.setType("image/*,video/*,audio/*");
+        startActivityForResult(Intent.createChooser(i, "file Chooser"), FILE_CHOOSER_RESULT_CODE);
     }
 
     @Override
