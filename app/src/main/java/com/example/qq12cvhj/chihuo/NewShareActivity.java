@@ -38,6 +38,9 @@ public class NewShareActivity extends AppCompatActivity implements View.OnClickL
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
+
         shareEditWebView.setWebChromeClient(new WebChromeClient(){
             // For Android < 3.0
             public void openFileChooser(ValueCallback<Uri> valueCallback) {
