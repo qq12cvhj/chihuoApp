@@ -119,34 +119,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /**添加五个底部菜单项*/
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.mipmap.ic_launcher),
-                        Color.parseColor("#11EEEE"))
-                        .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
+                        getResources().getDrawable(R.drawable.find),
+                        Color.parseColor("#BFEFFF"))
+                        .selectedIcon(getResources().getDrawable(R.drawable.find_s))
                         .title("发现")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.mipmap.ic_launcher),
-                        Color.parseColor("#FDF111"))
-                        .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
+                        getResources().getDrawable(R.drawable.cookbook),
+                        Color.parseColor("#BFEFFF"))
+                        .selectedIcon(getResources().getDrawable(R.drawable.cookbook_s))
                         .title("美食")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.mipmap.ic_launcher),
-                        Color.parseColor("#9AFF9A"))
-                        .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
+                        getResources().getDrawable(R.drawable.friend),
+                        Color.parseColor("#BFEFFF"))
+                        .selectedIcon(getResources().getDrawable(R.drawable.friend_s))
                         .title("朋友")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.mipmap.ic_launcher),
-                        Color.parseColor("#00F5FF"))
-                        .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
-                        .title("自己")
+                        getResources().getDrawable(R.drawable.me),
+                        Color.parseColor("#BFEFFF"))
+                        .selectedIcon(getResources().getDrawable(R.drawable.me_s))
+                        .title("我")
                         .build()
         );
         navigationTabBar.setModels(models);

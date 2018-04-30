@@ -13,8 +13,7 @@
         android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_height="50dp"
         android:background="#212222">
         <TextView
             android:gravity="center"
@@ -23,21 +22,22 @@
             android:text="吃货"
             android:layout_gravity="center"
             android:textSize="24sp"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_horizontal_ntb"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"/>
+        android:layout_weight="1"/>
 
 
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/ntb_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="50dp"
+            app:ntb_bg_color="#ffffff"
             app:ntb_badge_gravity="top"
             app:ntb_badge_position="right"
             app:ntb_badged="true"
