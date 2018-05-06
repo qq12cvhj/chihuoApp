@@ -16,13 +16,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mancj.slideup.SlideUp;
@@ -48,13 +45,15 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
     private Banner homebanner;
     private ImageView homenewbtn,homehotbtn,homeuserbtn,homecookbookbtn,slideCloseBtn;
     private View testView;
-    private SlideUp slideUp;
+    public static SlideUp slideUp;
     private List<UserAction> actionList = new ArrayList<>();
     private Gson gson = new Gson();
     private FragmentManager fm;
     private FragmentTransaction ft;
-    private ListView guessListView;
+    private GuessListview guessListView;
     private List<ShareInfo> guessList;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -78,7 +77,7 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         homebanner.setOnBannerListener(this);
         homebanner.start();
     }
-    @SuppressLint("CommitTransaction")
+    @SuppressLint({"CommitTransaction", "ClickableViewAccessibility"})
     private void initviews(){
         initBannerViews();
         homenewbtn = getActivity().findViewById(R.id.homenewbtn);
@@ -97,9 +96,10 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
                 .withStartState(SlideUp.State.HIDDEN)
                 .withStartGravity(Gravity.BOTTOM)
                 .build();
-        guessListView = getActivity().findViewById(R.id.guessYouList);
+        guessListView = (GuessListview) getActivity().findViewById(R.id.guessYouList);
         GuessShareAdapter guessShareAdapter = new GuessShareAdapter(getContext(),R.layout.guess_item,guessList);
         guessListView.setAdapter(guessShareAdapter);
+
     }
 
 

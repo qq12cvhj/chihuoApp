@@ -6,7 +6,8 @@
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
+                        android:textSize="18sp"
                         android:text="每日推送"
                         tools:ignore="HardcodedText" />
                     <com.youth.banner.Banner
@@ -31,6 +32,7 @@
                         android:id="@+id/home_banner"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
+                        app:banner_default_image="@drawable/defaultbanner"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -44,7 +46,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
+                        android:textSize="18sp"
                         android:text="发现"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -60,13 +62,13 @@
                             <ImageView
                                 android:id="@+id/homenewbtn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:src="@drawable/homenewicon"/>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="发现新菜"
+                                android:text="新品"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
                         <LinearLayout
@@ -79,7 +81,7 @@
                             <ImageView
                                 android:id="@+id/homeuserbtn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:src="@drawable/homeusericon"
                                 tools:ignore="ContentDescription" />
                             <TextView
@@ -99,7 +101,7 @@
                             <ImageView
                                 android:id="@+id/homehotbtn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:src="@drawable/homehoticon"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -117,7 +119,7 @@
                             <ImageView
                                 android:id="@+id/homecookbookbtn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:src="@drawable/cookbookicon"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -138,23 +140,16 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:text="猜你喜欢"
                     tools:ignore="HardcodedText" />
                     <!--分割线-->
-                <View
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#888888"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp" />
-                <ListView
+                <com.example.qq12cvhj.chihuo.GuessListview
                     android:id="@+id/guessYouList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+                </com.example.qq12cvhj.chihuo.GuessListview>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -181,6 +176,7 @@
             </FrameLayout>
 
         </LinearLayout>
+
         <FrameLayout
             android:id="@+id/slide_fragment"
             android:layout_width="match_parent"

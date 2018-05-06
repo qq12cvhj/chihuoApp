@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FloatingActionButton addFoodtypeBtn;
     FloatingActionButton addFoodBtn ;
     FloatingActionButton addShareBtn;
+    NavigationTabBar navigationTabBar;
+    long firstTime = 0;
     private android.support.v4.app.FragmentManager fm;
     private android.support.v4.app.FragmentTransaction ft;
     @Override
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return view;
             }
         });
-        final NavigationTabBar navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
+        navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
 
         /**添加五个底部菜单项*/
@@ -228,6 +230,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    /**
+     如果主页部分新品、热门用户、热门菜品等未隐藏，则隐藏下滑部分
+    否则双击退出程序*/
+    @Override
+    public void onBackPressed() {
+        if(HomeContent.slideUp.isVisible()&& navigationTabBar.getModelIndex() == 0 ){
+            HomeContent.slideUp.hide();
+        }else{
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
+
     private void toastShow(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
