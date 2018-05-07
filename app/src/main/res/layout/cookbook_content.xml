@@ -37,11 +37,16 @@
             android:text="搜索"/>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_cookbook"
-        style="@style/myRecyclerViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <GridView
+        android:id="@+id/grid_foodtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:layout_marginTop="20dp"
+        android:verticalSpacing="20dp"
+        android:horizontalSpacing="20dp">
+    </GridView>
+
 
 
 </LinearLayout>

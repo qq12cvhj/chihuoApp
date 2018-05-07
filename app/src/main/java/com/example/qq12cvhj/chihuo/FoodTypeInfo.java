@@ -11,6 +11,7 @@ public class FoodTypeInfo {
     int foodTypeId;
     String foodTypeName;
     String foodTypeDesc;
+    String coverImg;
     List<FoodInfo> foodInfoList ;
 
     public FoodTypeInfo(int typeId, String typeName,String description) {

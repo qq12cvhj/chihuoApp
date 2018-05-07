@@ -73,7 +73,7 @@ public class FriendContent extends Fragment implements View.OnClickListener {
                     .build();
             Response response = client.newCall(request).execute();
             String resonseData = response.body().string();
-            Log.d("responseData",resonseData);
+            Log.d("getActionList",resonseData);
             list = gson.fromJson(resonseData,new TypeToken<List<UserAction>>(){}.getType());
         }catch (Exception e){
             e.printStackTrace();

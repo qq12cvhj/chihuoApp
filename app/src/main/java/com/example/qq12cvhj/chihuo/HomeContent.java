@@ -127,9 +127,11 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
             TextView guess_nickname = (TextView) view.findViewById(R.id.guess_nickname);
             guess_title.setText(shareInfo.shareTitle);
             guess_nickname.setText(shareInfo.shareAuthor);
+            Log.d("guessShareList",shareInfo.shareTitleImg);
             Picasso.get()
                     .load(shareInfo.shareTitleImg)
                     .config(Bitmap.Config.RGB_565)
+                    .resize(800,400)
                     .into(guess_img);
             return view;
         }
