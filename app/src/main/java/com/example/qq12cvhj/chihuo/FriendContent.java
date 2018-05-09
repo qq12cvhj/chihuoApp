@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import devlight.io.library.ntb.NavigationTabBar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -59,7 +60,15 @@ public class FriendContent extends Fragment implements View.OnClickListener {
                     getContext(),R.layout.list_action_item,actionList);
             actionListView.setAdapter(actionAdapter);
         }else{
-
+            View friend_out = getActivity().findViewById(R.id.friend_out);
+            friend_out.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //取得底部菜单栏，setModelIndex()为底部索引，即触发点击事件。
+                    NavigationTabBar navigationTabBar = getActivity().findViewById(R.id.ntb_horizontal);
+                    navigationTabBar.setModelIndex(3);
+                }
+            });
         }
         super.onResume();
     }

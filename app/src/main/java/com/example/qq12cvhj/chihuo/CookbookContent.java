@@ -10,17 +10,22 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +34,13 @@ import com.google.gson.reflect.TypeToken;
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
+import com.mancj.slideup.SlideUp;
+import com.mancj.slideup.SlideUpBuilder;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +57,14 @@ import okhttp3.Response;
 public class CookbookContent extends Fragment implements View.OnClickListener {
     private BiuEditText searchFoodEditText;
     public Button searchFoodBtn;
+    private View cbSlideView;
     private GridView grid_foodtype;
     private List<FoodTypeInfo> foodTypeInfoList;
     private Gson gson;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    public static SlideUp cbSlideUp;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,8 +94,105 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
         foodTypeInfoList = getTypeList();
         grid_foodtype = getActivity().findViewById(R.id.grid_foodtype);
         FoodTypeAdapter foodTypeAdapter = new FoodTypeAdapter(getContext(),R.layout.food_type_item,foodTypeInfoList);
+        cbSlideView = getActivity().findViewById(R.id.cb_slideView);
+        cbSlideUp = new SlideUpBuilder(cbSlideView)
+                .withStartState(SlideUp.State.HIDDEN)
+                .withStartGravity(Gravity.BOTTOM)
+                .build();
         grid_foodtype.setAdapter(foodTypeAdapter);
+        grid_foodtype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FoodTypeInfo foodTypeInfo = foodTypeInfoList.get(position);
+                CbSlide cbSlide = new CbSlide(foodTypeInfo);
+                fm = getFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.cb_slide_fragment,cbSlide);
+                ft.commit();
+                cbSlideUp.show();
+            }
+        });
+
         super.onResume();
+    }
+
+    static class CbFoodAdapter extends ArrayAdapter<FoodInfo>{
+        int resourceId;
+        public CbFoodAdapter(@NonNull Context context, int textViewResourceId, @NonNull List<FoodInfo> objects) {
+            super(context,  textViewResourceId, objects);
+            resourceId = textViewResourceId;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            @SuppressLint("ViewHolder") View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+            TextView cbFoodName = view.findViewById(R.id.cb_food_name);
+            FoodInfo foodInfo = getItem(position);
+            cbFoodName.setText(foodInfo.foodName);
+            return view;
+        }
+    }
+
+    @SuppressLint("ValidFragment")
+    public static class CbSlide extends Fragment implements View.OnClickListener {
+        private FoodTypeInfo typeInfo;
+        private ImageView cbSlideClose;
+        private List<FoodInfo> foodInfoList;
+        private ListView foodlistView;
+        public  CbSlide(FoodTypeInfo foodTypeInfo){
+            typeInfo = foodTypeInfo;
+            foodInfoList = foodTypeInfo.foodInfoList;
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view;
+            view = inflater.inflate(R.layout.cb_slide,container,false);
+            return view;
+        }
+
+        @Override
+        public void onResume() {
+            initViews();
+            super.onResume();
+        }
+        public void initViews(){
+            TextView typeNameText = getActivity().findViewById(R.id.typeNameText);
+            typeNameText.setText(typeInfo.foodTypeName);
+            TextView typeDescText = getActivity().findViewById(R.id.typeDescText);
+            typeDescText.setText(typeInfo.foodTypeDesc);
+            cbSlideClose = getActivity().findViewById(R.id.cbSlideClose);
+            cbSlideClose.setOnClickListener(this);
+            foodlistView = getActivity().findViewById(R.id.foodlistView);
+            if(foodInfoList.size()==0){
+                TextView cbFoodListHint = getActivity().findViewById(R.id.cbFoodListHint);
+                cbFoodListHint.setVisibility(View.VISIBLE);
+            }else{
+                CbFoodAdapter cbFoodAdapter = new CbFoodAdapter(getContext(),R.layout.cb_food_item,foodInfoList);
+                foodlistView.setAdapter(cbFoodAdapter);
+                foodlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        FoodInfo foodInfo = foodInfoList.get(position);
+                        Intent foodIntent = new Intent(getContext(),FoodDetailActivity.class);
+                        foodIntent.putExtra("trFoodid",foodInfo.foodId);
+                        foodIntent.putExtra("trFoodName",foodInfo.foodName);
+                        getContext().startActivity(foodIntent);
+                    }
+                });
+            }
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.cbSlideClose:
+                CookbookContent.cbSlideUp.hide();
+            }
+        }
     }
 
     class FoodTypeAdapter extends ArrayAdapter<FoodTypeInfo>{
@@ -121,6 +233,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
                     list = gson.fromJson(resonseData,new TypeToken<List<FoodTypeInfo>>(){}.getType());
                     for(FoodTypeInfo fti : list){
                         fti.foodInfoList = getFoodList(fti.foodTypeId);
+                        commonInfo.foodTypeList.add(fti);
                     }
                 }catch(Exception e){
                     e.printStackTrace();

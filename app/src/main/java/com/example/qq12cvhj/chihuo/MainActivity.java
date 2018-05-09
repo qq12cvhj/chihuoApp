@@ -236,8 +236,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     否则双击退出程序*/
     @Override
     public void onBackPressed() {
-        if(HomeContent.slideUp.isVisible()&& navigationTabBar.getModelIndex() == 0 ){
+        if(HomeContent.slideUp.isVisible()&& navigationTabBar.getModelIndex() == 0  ){
             HomeContent.slideUp.hide();
+        }else if(CookbookContent.cbSlideUp.isVisible()&& navigationTabBar.getModelIndex() == 1){
+            CookbookContent.cbSlideUp.hide();
         }else{
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
