@@ -15,6 +15,8 @@ public  class commonInfo {
     public static User currentUser;
     public static int viewChangeStatus = 0;
     public static boolean loginStatus = false;
+    public static String wechatAppId = "wx088cb04b9063e415";
+    public static String wechatSecret = "2edf642ce10dc3bee3a7c8a10d91a07b";
     /** 说明一下这里使用全局变量的原因，主要是在菜谱一栏的点击事件中能快速定位到所点击的对象
      * 由于程序的UI使用的第三方UI，水平有限，API没读太懂，所以暂时使用全局变量实现。以下的getAndSetFoodInfo
      * 用来模拟，实际使用中主要通过网络，从数据库服务器中获取内容。

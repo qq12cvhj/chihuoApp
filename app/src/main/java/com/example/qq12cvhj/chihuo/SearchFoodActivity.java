@@ -80,6 +80,7 @@ public class SearchFoodActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(SearchFoodActivity.this, FoodDetailActivity.class);
                 intent1.putExtra("trFoodid",foodInfo.foodId);
                 intent1.putExtra("trFoodName",foodInfo.foodName);
+                intent1.putExtra("trImgSrc", foodInfo.foodImgSrc);
                 startActivity(intent1);
             }
         });

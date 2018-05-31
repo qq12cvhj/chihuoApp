@@ -139,7 +139,6 @@ public class MeContent extends Fragment implements View.OnClickListener {
                 startActivity(myinfointent);
                 break;
             case R.id.myFavoriteBtn:
-                Log.d("aaa","222");
                 commonInfo.viewChangeStatus = 2;
                 Intent favoIntent = new Intent(getActivity(),SearchFoodActivity.class);
                 favoIntent.putExtra("userId",commonInfo.currentUserId);

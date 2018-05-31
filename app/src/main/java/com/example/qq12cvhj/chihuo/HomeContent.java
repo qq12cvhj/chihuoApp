@@ -182,6 +182,8 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
             case 1:
                 Intent intent1 = new Intent(getActivity(),FoodDetailActivity.class);
                 intent1.putExtra("trFoodid",action.objectId);
+                intent1.putExtra("trFoodName",action.objectName);
+                intent1.putExtra("trImgSrc",action.titleImg);
                 startActivity(intent1);
                 break;
             case 2:

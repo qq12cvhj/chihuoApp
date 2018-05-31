@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="com.github.f0ris.sweetalert:library-1.5.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/608710e8c767d36c3af1c0624f08256e/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/608710e8c767d36c3af1c0624f08256e/res" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/bf8277ce6fc7be46ec31abc4ad4d06a7/jars/classes.jar!/" />
+      <root url="file://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/bf8277ce6fc7be46ec31abc4ad4d06a7/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.f0ris.sweetalert/library/1.5.1/88fd2f7eecfc597fde6e7db1a147029d89f22cfc/library-1.5.1-sources.jar!/" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/modules-2/files-2.1/com.github.f0ris.sweetalert/library/1.5.1/88fd2f7eecfc597fde6e7db1a147029d89f22cfc/library-1.5.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -38,8 +38,13 @@ dependencies {
     api 'com.youth.banner:banner:1.4.10'
     api 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     api "com.github.mancj:SlideUp-Android:2.2.8"
+    api 'com.github.imangazalievm:circlemenu:2.0.1'
+    api 'com.echodjb.shareloginlib:share:0.6'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
+    }
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v4'
     }
 
 

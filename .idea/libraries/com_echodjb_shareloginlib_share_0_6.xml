@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="com.echodjb.shareloginlib:share-0.6">
+    <CLASSES>
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/share-0.6.aar/e783de212a89f4e68cd85d039f037d7d/jars/classes.jar!/" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/share-0.6.aar/e783de212a89f4e68cd85d039f037d7d/jars/libs/open_sdk_r5276.jar!/" />
+      <root url="file://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/share-0.6.aar/e783de212a89f4e68cd85d039f037d7d/res" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/share-0.6.aar/e783de212a89f4e68cd85d039f037d7d/jars/libs/weibosdkcore_v3.0.1.jar!/" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/share-0.6.aar/e783de212a89f4e68cd85d039f037d7d/jars/libs/libammsdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/modules-2/files-2.1/com.echodjb.shareloginlib/share/0.6/590bef6f404d5d5a75b7d8d7f506bf5a9be7a97/share-0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

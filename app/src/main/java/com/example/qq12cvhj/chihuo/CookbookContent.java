@@ -179,6 +179,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
                         Intent foodIntent = new Intent(getContext(),FoodDetailActivity.class);
                         foodIntent.putExtra("trFoodid",foodInfo.foodId);
                         foodIntent.putExtra("trFoodName",foodInfo.foodName);
+                        foodIntent.putExtra("trImgSrc",foodInfo.foodImgSrc);
                         getContext().startActivity(foodIntent);
                     }
                 });
@@ -210,7 +211,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
             ImageView coverImg = view.findViewById(R.id.typeCover);
             TextView typeName = view.findViewById(R.id.typeName);
             Picasso.get()
-                    .load("http://192.168.1.101:5000/static/imgsUpload/chihuo.png")
+                    .load("http://www.qq12cvhj.cn:5000/static/imgsUpload/chihuo.png")
                     .resize(150,150)
                     .config(Bitmap.Config.RGB_565)
                     .into(coverImg);

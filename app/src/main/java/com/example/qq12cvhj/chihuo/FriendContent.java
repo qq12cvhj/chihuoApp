@@ -78,7 +78,7 @@ public class FriendContent extends Fragment implements View.OnClickListener {
         try{
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(commonInfo.httpUrl("getActionList"))
+                    .url(commonInfo.httpUrl("getActionList"+commonInfo.currentUserId))
                     .build();
             Response response = client.newCall(request).execute();
             String resonseData = response.body().string();

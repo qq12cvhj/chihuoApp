@@ -53,6 +53,8 @@ public class ActionAdapter extends ArrayAdapter<UserAction>{
                         toastShow("前往菜品"+userAction.objectId);
                         Intent intent1 = new Intent(getContext(),FoodDetailActivity.class);
                         intent1.putExtra("trFoodid",userAction.objectId);
+                        intent1.putExtra("trFoodName",userAction.objectName);
+                        intent1.putExtra("trImgSrc",userAction.titleImg);
                         getContext().startActivity(intent1);
                     }
                 });
@@ -77,6 +79,8 @@ public class ActionAdapter extends ArrayAdapter<UserAction>{
                         toastShow("前往菜品"+userAction.objectId);
                         Intent intent3 = new Intent(getContext(),FoodDetailActivity.class);
                         intent3.putExtra("trFoodid",userAction.objectId);
+                        intent3.putExtra("trFoodName",userAction.objectName);
+                        intent3.putExtra("trImgSrc",userAction.titleImg);
                         getContext().startActivity(intent3);
                     }
                 });

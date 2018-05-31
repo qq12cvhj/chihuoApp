@@ -1,47 +1,48 @@
 package com.example.qq12cvhj.chihuo;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextPaint;
 import android.util.Log;
-import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
+import com.imangazaliev.circlemenu.CircleMenu;
+import com.imangazaliev.circlemenu.CircleMenuButton;
+import com.liulishuo.share.ShareBlock;
+import com.liulishuo.share.model.IShareManager;
+import com.liulishuo.share.model.ShareContentWebpage;
+import com.liulishuo.share.wechat.WechatShareManager;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import okhttp3.CipherSuite;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class FoodDetailActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class FoodDetailActivity extends AppCompatActivity implements  CircleMenu.OnItemClickListener {
     WebView getFoodInfoWebView;
-    Button starBtn;
+    CircleMenu shareMenu;
+    CircleMenuButton starfood,shareWechat;
     int trFoodid;
+    String trFoodName;
+    String trImgSrc;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_datail);
+        ShareBlock.getInstance().initShare(commonInfo.wechatAppId, "", "",
+                commonInfo.wechatSecret);
         Intent intent = getIntent();
         trFoodid = intent.getIntExtra("trFoodid",-1);
-        String trFoodName = intent.getStringExtra("trFoodName");
+        trFoodName = intent.getStringExtra("trFoodName");
+        trImgSrc = intent.getStringExtra("trImgSrc");
         /**没得到传来的值，出错，关闭activity*/
         if(trFoodid==-1){
                 new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -59,8 +60,10 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                 actionBar.hide();
                 //actionBar.setTitle(trFoodName);
             }
-            starBtn = findViewById(R.id.starBtn);
-            starBtn.setOnClickListener(this);
+            starfood = findViewById(R.id.starfood);
+            shareMenu = findViewById(R.id.shareMenu);
+            shareWechat = findViewById(R.id.shareWechat);
+            shareMenu.setOnItemClickListener(this);
             getFoodInfoWebView = findViewById(R.id.getFoodInfoWebView);
             WebSettings settings = getFoodInfoWebView.getSettings();
             settings.setUseWideViewPort(true);
@@ -93,18 +96,20 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
             });
             getFoodInfoWebView.loadUrl(commonInfo.httpUrl("getFoodInfo"+trFoodid));
             if(!commonInfo.loginStatus){
-                starBtn.setText("登录收藏");
-                starBtn.setBackgroundResource(R.drawable.shape_white_button);
+                starfood.setImageResource(R.drawable.like);
+                starfood.setTag("");
             }else{
                 if(starStatus(commonInfo.currentUserId,trFoodid)){
-                    starBtn.setBackgroundResource(R.drawable.red_button_background);
-                    starBtn.setText("取消收藏");
+                    starfood.setImageResource(R.drawable.unlike);
+                    starfood.setTag(true);
                 }else{
-                    starBtn.setBackgroundResource(R.drawable.shape_white_button);
-                    starBtn.setText("点击收藏");
+                    starfood.setImageResource(R.drawable.like);
+                    starfood.setTag(false);
                 }
 
             }
+
+
         }
     }
 
@@ -171,29 +176,41 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
         return status[0];
     }
 
-
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.starBtn:
-                if(starBtn.getText().equals("点击收藏")){
-                    starOrCancel(trFoodid,commonInfo.currentUserId);
-                    starBtn.setBackgroundResource(R.drawable.red_button_background);
-                    starBtn.setText("取消收藏");
-                }else if(starBtn.getText().equals("取消收藏")){
-                    starOrCancel(trFoodid,commonInfo.currentUserId);
-                    starBtn.setText("点击收藏");
-                    starBtn.setBackgroundResource(R.drawable.shape_white_button);
-                }else{
-                    toastShow("登录后才能收藏哈！！");
-                }
-                break;
-        }
-
-    }
     private void toastShow(String str){
         Toast.makeText(this,str, Toast.LENGTH_SHORT).show();
     }
+    //设置菜单的点击事件
+    @Override
+    public void onItemClick(CircleMenuButton menuButton) {
+        switch(menuButton.getId()){
+                case R.id.starfood:
+                    if(menuButton.getTag().equals(false)){
+                        starOrCancel(trFoodid,commonInfo.currentUserId);
+                        menuButton.setTag(true);
+                        menuButton.setImageResource(R.drawable.unlike);
+                        toastShow("你收藏了此菜品");
+                    }else if(menuButton.getTag().equals(true)){
+                        starOrCancel(trFoodid,commonInfo.currentUserId);
+                        menuButton.setTag(false);
+                        menuButton.setImageResource(R.drawable.like);
+                        toastShow("你取消收藏了此菜品");
+                    }else{
+                        toastShow("登录后才能收藏哦！");
+                    }
+                    break;
+                case R.id.shareWechat:
+                    IShareManager iShareManager = new WechatShareManager(FoodDetailActivity.this);
+                    iShareManager.share(new ShareContentWebpage(
+                            trFoodName,
+                            "为你分享最新菜肴，快来试试哦！",
+                            commonInfo.httpUrl("getFoodInfo"+trFoodid),
+                            trImgSrc
+                            ),WechatShareManager.WEIXIN_SHARE_TYPE_TALK);
 
+
+
+        }
+
+    }
 }
+

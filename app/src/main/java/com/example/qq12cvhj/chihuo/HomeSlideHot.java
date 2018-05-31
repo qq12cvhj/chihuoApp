@@ -56,6 +56,7 @@ public class HomeSlideHot extends Fragment {
                 Intent foodIntent = new Intent(getContext(),FoodDetailActivity.class);
                 foodIntent.putExtra("trFoodid",foodInfo.foodId);
                 foodIntent.putExtra("trFoodName",foodInfo.foodName);
+                foodIntent.putExtra("trImgSrc",foodInfo.foodImgSrc);
                 getContext().startActivity(foodIntent);
             }
         });

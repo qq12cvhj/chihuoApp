@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="com.android.support:design-23.2.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-23.2.1.aar/4c958ee8cc66bb756afe218a7eb01076/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-23.2.1.aar/4c958ee8cc66bb756afe218a7eb01076/jars/classes.jar!/" />
+      <root url="file://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/design-23.2.1.aar/f00a9221b61883c886ef8b16d8002a55/res" />
+      <root url="jar://D:/aboutAndroidStudio/.gradle/caches/transforms-1/files-1.1/design-23.2.1.aar/f00a9221b61883c886ef8b16d8002a55/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/AppData/Local/Android/Sdk/extras/android/m2repository/com/android/support/design/23.2.1/design-23.2.1-javadoc.jar!/" />
+      <root url="jar://E:/Android/Sdk/extras/android/m2repository/com/android/support/design/23.2.1/design-23.2.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/AppData/Local/Android/Sdk/extras/android/m2repository/com/android/support/design/23.2.1/design-23.2.1-sources.jar!/" />
+      <root url="jar://E:/Android/Sdk/extras/android/m2repository/com/android/support/design/23.2.1/design-23.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
