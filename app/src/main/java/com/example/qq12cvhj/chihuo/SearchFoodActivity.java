@@ -9,14 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,6 +23,7 @@ public class SearchFoodActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     //暂时先使用最简单的listView,即一个菜品名称构成的listItem,后续会修改成更加多元化的东西
     private List<FoodInfo> foodSearchList = new ArrayList<>();
+    private TextView searchTip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //保证可以在主线程中使用okhttp
@@ -71,6 +70,11 @@ public class SearchFoodActivity extends AppCompatActivity {
         FoodInfoAdapter foodSearchAdapter = new FoodInfoAdapter(
         this,R.layout.search_food_item,foodSearchList);
         final ListView listView = (ListView) findViewById(R.id.search_food_list);
+        if(foodSearchList.size()==0){
+            searchTip = findViewById(R.id.search_tip);
+            searchTip.setVisibility(View.VISIBLE);
+            searchTip.setText("列表为空~囧囧囧");
+        }
         listView.setAdapter(foodSearchAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

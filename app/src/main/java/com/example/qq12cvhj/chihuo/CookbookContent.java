@@ -211,7 +211,7 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
             ImageView coverImg = view.findViewById(R.id.typeCover);
             TextView typeName = view.findViewById(R.id.typeName);
             Picasso.get()
-                    .load("http://www.qq12cvhj.cn:5000/static/imgsUpload/chihuo.png")
+                    .load(foodTypeInfo.coverImg)
                     .resize(150,150)
                     .config(Bitmap.Config.RGB_565)
                     .into(coverImg);
@@ -234,12 +234,13 @@ public class CookbookContent extends Fragment implements View.OnClickListener {
                     list = gson.fromJson(resonseData,new TypeToken<List<FoodTypeInfo>>(){}.getType());
                     for(FoodTypeInfo fti : list){
                         fti.foodInfoList = getFoodList(fti.foodTypeId);
-                        commonInfo.foodTypeList.add(fti);
+                        //commonInfo.foodTypeList.add(fti);
                     }
                 }catch(Exception e){
                     e.printStackTrace();
                     list = new ArrayList<>();
                 }
+                commonInfo.foodTypeList = list;
                 return list;
         }
 

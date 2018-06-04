@@ -41,6 +41,11 @@ dependencies {
     api 'com.github.imangazalievm:circlemenu:2.0.1'
     api 'com.echodjb.shareloginlib:share:0.6'
     api 'com.github.michaldrabik:tapbarmenu:1.0.5'
+    api 'com.caimuhao:rxpicker:1.1.5'
+    api 'com.android.support:recyclerview-v7:26.1.0'
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.amitshekhar.android:android-networking:1.0.1'
+    api 'com.amitshekhar.android:jackson-android-networking:1.0.1'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }

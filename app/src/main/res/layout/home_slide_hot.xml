@@ -5,11 +5,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="热门菜品等信息将在这里展示，敬请期待。"
+        android:text="热门菜品"
         android:textSize="20sp"/>
-    <ListView
-        android:id="@+id/hotFoodList"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/hot_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="抱歉，暂无~"
+            android:visibility="gone"/>
+        <ListView
+            android:id="@+id/hotFoodList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </FrameLayout>
+
 </LinearLayout>

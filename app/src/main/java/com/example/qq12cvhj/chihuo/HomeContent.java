@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ import okhttp3.Response;
  * Created by qq12cvhj on 2018/4/22.
  */
 
-public class HomeContent extends Fragment implements OnBannerListener, View.OnClickListener {
+public class HomeContent extends Fragment implements OnBannerListener, View.OnClickListener, AdapterView.OnItemClickListener {
     private Banner homebanner;
     private ImageView homenewbtn,homehotbtn,homeuserbtn,homecookbookbtn,slideCloseBtn;
     private View testView;
@@ -99,6 +100,7 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         guessListView = (GuessListview) getActivity().findViewById(R.id.guessYouList);
         GuessShareAdapter guessShareAdapter = new GuessShareAdapter(getContext(),R.layout.guess_item,guessList);
         guessListView.setAdapter(guessShareAdapter);
+        guessListView.setOnItemClickListener(this);
 
     }
 
@@ -108,6 +110,14 @@ public class HomeContent extends Fragment implements OnBannerListener, View.OnCl
         guessList = getGuessList();
         initviews();
         super.onResume();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ShareInfo shareInfo = guessList.get(position);
+        Intent shareIntent = new Intent(getActivity(),ShareDetailActivity.class);
+        shareIntent.putExtra("trShareId",shareInfo.shareId);
+        startActivity(shareIntent);
     }
 
     class GuessShareAdapter extends ArrayAdapter<ShareInfo>{

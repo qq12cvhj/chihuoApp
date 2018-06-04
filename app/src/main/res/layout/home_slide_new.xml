@@ -9,9 +9,22 @@
         android:text="最新菜品"
         android:textSize="20sp"
         tools:ignore="HardcodedText" />
-    <ListView
-        android:id="@+id/newFoodList"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/new_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="抱歉，暂无~"
+            android:visibility="gone"/>
+        <ListView
+            android:id="@+id/newFoodList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </FrameLayout>
+
 </LinearLayout>

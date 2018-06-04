@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,6 +32,7 @@ public class FriendContent extends Fragment implements View.OnClickListener {
     private List<UserAction> actionList = new ArrayList<>();
     private Gson gson = new Gson();
     private ListView actionListView;
+    private TextView action_tip;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -59,6 +61,11 @@ public class FriendContent extends Fragment implements View.OnClickListener {
             ActionAdapter actionAdapter = new ActionAdapter(
                     getContext(),R.layout.list_action_item,actionList);
             actionListView.setAdapter(actionAdapter);
+            if(actionList.size() == 0){
+                action_tip = getActivity().findViewById(R.id.action_tip);
+                action_tip.setText("对不起，暂无");
+                action_tip.setVisibility(View.VISIBLE);
+            }
         }else{
             View friend_out = getActivity().findViewById(R.id.friend_out);
             friend_out.setOnClickListener(new View.OnClickListener() {

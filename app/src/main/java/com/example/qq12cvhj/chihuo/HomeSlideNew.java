@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,7 @@ public class HomeSlideNew extends Fragment {
     Gson gson;
     private ListView newFoodListview;
     private List<FoodInfo> newFoodList;
+    private TextView new_tip;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class HomeSlideNew extends Fragment {
     public void onResume() {
         newFoodList = getNewFoodList();
         initViews();
+        if(newFoodList.size() == 0){
+            new_tip = getActivity().findViewById(R.id.new_tip);
+            new_tip.setVisibility(View.VISIBLE);
+        }
+
         super.onResume();
     }
 
